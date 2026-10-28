@@ -1,0 +1,18 @@
+{
+  "model": "ridge",
+  "strategy": "event_p95_score",
+  "roc_auc": 0.7909,
+  "pr_auc": 0.8283,
+  "optimal_threshold": 1.0998,
+  "f1_max": 0.8333,
+  "precision": 0.7692,
+  "recall": 0.9091,
+  "fpr": 0.3,
+  "tp": 10,
+  "fp": 3,
+  "tn": 7,
+  "fn": 1,
+  "total_events": 21,
+  "anomaly_events": 11,
+  "normal_events": 10
+}

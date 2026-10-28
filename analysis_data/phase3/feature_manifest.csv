@@ -1,0 +1,156 @@
+feature_name,source_column(s),feature_type,window,physical_category,physical_interpretation,leakage_status
+dT_gbx_brg,"sensor_11_avg,sensor_0_avg",derived_instant,instant,gearbox,gearbox HS-shaft bearing temperature above ambient,safe
+dT_gbx_oil,"sensor_12_avg,sensor_0_avg",derived_instant,instant,gearbox,gearbox oil temperature above ambient,safe
+dT_genbrg_de,"sensor_13_avg,sensor_0_avg",derived_instant,instant,generator_bearing,generator bearing 2 (DE) above ambient,safe
+dT_genbrg_nde,"sensor_14_avg,sensor_0_avg",derived_instant,instant,generator_bearing,generator bearing 1 (NDE) above ambient,safe
+dT_hyd_oil,"sensor_41_avg,sensor_0_avg",derived_instant,instant,hydraulic,hydraulic group oil above ambient,safe
+dT_splitring,"sensor_19_avg,sensor_0_avg",derived_instant,instant,generator,split ring chamber above ambient,safe
+dT_nacelle,"sensor_43_avg,sensor_0_avg",derived_instant,instant,reference,nacelle temperature above ambient,safe
+dT_nosecone,"sensor_53_avg,sensor_0_avg",derived_instant,instant,reference,nose cone temperature above ambient,safe
+dT_stator,"sensor_15/16/17_avg,sensor_0_avg",derived_instant,instant,generator,mean stator winding temperature above ambient,safe
+dT_trafo,"sensor_38/39/40_avg,sensor_0_avg",derived_instant,instant,transformer,mean HV transformer temperature above ambient,safe
+genbrg_de_minus_nde,"sensor_13_avg,sensor_14_avg",derived_instant,instant,generator_bearing,"DE minus NDE bearing temperature - self-normalising, cancels ambient and load",safe
+gbx_brg_minus_oil,"sensor_11_avg,sensor_12_avg",derived_instant,instant,gearbox,gearbox bearing minus oil temperature - local bearing heating,safe
+stator_spread,sensor_15/16/17_avg,derived_instant,instant,generator,stator three-phase temperature imbalance,safe
+trafo_spread,sensor_38/39/40_avg,derived_instant,instant,transformer,HV transformer three-phase temperature imbalance,safe
+igbt_rotor_spread,sensor_35/36/37_avg,derived_instant,instant,converter,rotor-side IGBT three-phase temperature imbalance,safe
+current_spread,sensor_23/24/25_avg,derived_instant,instant,electrical,three-phase current imbalance,safe
+voltage_spread,sensor_32/33/34_avg,derived_instant,instant,electrical,three-phase voltage imbalance,safe
+gear_ratio,"sensor_18_avg,sensor_52_avg",derived_instant,instant,mechanical,generator rpm / rotor rpm; NaN when rotor <= 5 rpm,safe
+tsr_proxy,"sensor_52_avg,wind_speed_3_avg",derived_instant,instant,mechanical,rotor rpm / wind speed - tip-speed-ratio proxy; NaN when wind <= 1 m/s,safe
+wind_turbulence,"wind_speed_3_std,wind_speed_3_avg",derived_instant,instant,wind,turbulence intensity; NaN when wind <= 1 m/s,safe
+wind_speed_disagree,"wind_speed_3_avg,wind_speed_4_avg",derived_instant,instant,wind,measured minus estimated wind speed - anemometer health,safe
+power_deficit,"power_29_avg,power_30_avg",derived_instant,instant,power,possible minus actual active power - curtailment / derating,safe
+power_curve_dev,"power_30_avg,wind_speed_3_avg",derived_instant,instant,power,"actual minus this turbine's own historic mean power at the same wind speed (expanding per-bin reference, shifted one row - uses no future data)",safe
+yaw_misalign_sin,sensor_2_avg,angular_sin,instant,wind,sin of sensor_2_avg (degrees) - angular encoding; arithmetic means of wrapping angles are invalid,safe
+yaw_misalign_cos,sensor_2_avg,angular_cos,instant,wind,cos of sensor_2_avg (degrees) - angular encoding; arithmetic means of wrapping angles are invalid,safe
+wind_dir_sin,sensor_1_avg,angular_sin,instant,wind,sin of sensor_1_avg (degrees) - angular encoding; arithmetic means of wrapping angles are invalid,safe
+wind_dir_cos,sensor_1_avg,angular_cos,instant,wind,cos of sensor_1_avg (degrees) - angular encoding; arithmetic means of wrapping angles are invalid,safe
+nacelle_dir_sin,sensor_42_avg,angular_sin,instant,mechanical,sin of sensor_42_avg (degrees) - angular encoding; arithmetic means of wrapping angles are invalid,safe
+nacelle_dir_cos,sensor_42_avg,angular_cos,instant,mechanical,cos of sensor_42_avg (degrees) - angular encoding; arithmetic means of wrapping angles are invalid,safe
+dT_gbx_brg__mean_3h,"sensor_11_avg,sensor_0_avg",rolling_mean,3h,gearbox,3h backward mean of gearbox HS-shaft bearing temperature rise over ambient,safe
+dT_gbx_brg__std_3h,"sensor_11_avg,sensor_0_avg",rolling_std,3h,gearbox,3h backward std dev of gearbox HS-shaft bearing temperature rise over ambient,safe
+dT_gbx_brg__mean_24h,"sensor_11_avg,sensor_0_avg",rolling_mean,24h,gearbox,24h backward mean of gearbox HS-shaft bearing temperature rise over ambient,safe
+dT_gbx_brg__std_24h,"sensor_11_avg,sensor_0_avg",rolling_std,24h,gearbox,24h backward std dev of gearbox HS-shaft bearing temperature rise over ambient,safe
+dT_gbx_brg__mean_7d,"sensor_11_avg,sensor_0_avg",rolling_mean,7d,gearbox,7d backward mean of gearbox HS-shaft bearing temperature rise over ambient,safe
+dT_gbx_brg__std_7d,"sensor_11_avg,sensor_0_avg",rolling_std,7d,gearbox,7d backward std dev of gearbox HS-shaft bearing temperature rise over ambient,safe
+dT_gbx_brg__range_24h,"sensor_11_avg,sensor_0_avg",rolling_range,24h,gearbox,24h backward max-min of gearbox HS-shaft bearing temperature rise over ambient,safe
+dT_gbx_brg__slope_24h,"sensor_11_avg,sensor_0_avg",rolling_slope,24h,gearbox,24h backward OLS trend of gearbox HS-shaft bearing temperature rise over ambient (units/hour),safe
+dT_gbx_brg__dev_short_long,"sensor_11_avg,sensor_0_avg",short_vs_long_deviation,3h vs 7d,gearbox,3h mean minus 7d mean of gearbox HS-shaft bearing temperature rise over ambient - recent departure from the machine's own baseline,safe
+dT_gbx_oil__mean_3h,"sensor_12_avg,sensor_0_avg",rolling_mean,3h,gearbox,3h backward mean of gearbox oil temperature rise over ambient,safe
+dT_gbx_oil__std_3h,"sensor_12_avg,sensor_0_avg",rolling_std,3h,gearbox,3h backward std dev of gearbox oil temperature rise over ambient,safe
+dT_gbx_oil__mean_24h,"sensor_12_avg,sensor_0_avg",rolling_mean,24h,gearbox,24h backward mean of gearbox oil temperature rise over ambient,safe
+dT_gbx_oil__std_24h,"sensor_12_avg,sensor_0_avg",rolling_std,24h,gearbox,24h backward std dev of gearbox oil temperature rise over ambient,safe
+dT_gbx_oil__mean_7d,"sensor_12_avg,sensor_0_avg",rolling_mean,7d,gearbox,7d backward mean of gearbox oil temperature rise over ambient,safe
+dT_gbx_oil__std_7d,"sensor_12_avg,sensor_0_avg",rolling_std,7d,gearbox,7d backward std dev of gearbox oil temperature rise over ambient,safe
+dT_gbx_oil__range_24h,"sensor_12_avg,sensor_0_avg",rolling_range,24h,gearbox,24h backward max-min of gearbox oil temperature rise over ambient,safe
+dT_gbx_oil__slope_24h,"sensor_12_avg,sensor_0_avg",rolling_slope,24h,gearbox,24h backward OLS trend of gearbox oil temperature rise over ambient (units/hour),safe
+dT_gbx_oil__dev_short_long,"sensor_12_avg,sensor_0_avg",short_vs_long_deviation,3h vs 7d,gearbox,3h mean minus 7d mean of gearbox oil temperature rise over ambient - recent departure from the machine's own baseline,safe
+dT_genbrg_de__mean_3h,"sensor_13_avg,sensor_0_avg",rolling_mean,3h,generator_bearing,3h backward mean of generator bearing 2 (DE) temperature rise over ambient,safe
+dT_genbrg_de__std_3h,"sensor_13_avg,sensor_0_avg",rolling_std,3h,generator_bearing,3h backward std dev of generator bearing 2 (DE) temperature rise over ambient,safe
+dT_genbrg_de__mean_24h,"sensor_13_avg,sensor_0_avg",rolling_mean,24h,generator_bearing,24h backward mean of generator bearing 2 (DE) temperature rise over ambient,safe
+dT_genbrg_de__std_24h,"sensor_13_avg,sensor_0_avg",rolling_std,24h,generator_bearing,24h backward std dev of generator bearing 2 (DE) temperature rise over ambient,safe
+dT_genbrg_de__mean_7d,"sensor_13_avg,sensor_0_avg",rolling_mean,7d,generator_bearing,7d backward mean of generator bearing 2 (DE) temperature rise over ambient,safe
+dT_genbrg_de__std_7d,"sensor_13_avg,sensor_0_avg",rolling_std,7d,generator_bearing,7d backward std dev of generator bearing 2 (DE) temperature rise over ambient,safe
+dT_genbrg_de__range_24h,"sensor_13_avg,sensor_0_avg",rolling_range,24h,generator_bearing,24h backward max-min of generator bearing 2 (DE) temperature rise over ambient,safe
+dT_genbrg_de__slope_24h,"sensor_13_avg,sensor_0_avg",rolling_slope,24h,generator_bearing,24h backward OLS trend of generator bearing 2 (DE) temperature rise over ambient (units/hour),safe
+dT_genbrg_de__dev_short_long,"sensor_13_avg,sensor_0_avg",short_vs_long_deviation,3h vs 7d,generator_bearing,3h mean minus 7d mean of generator bearing 2 (DE) temperature rise over ambient - recent departure from the machine's own baseline,safe
+dT_genbrg_nde__mean_3h,"sensor_14_avg,sensor_0_avg",rolling_mean,3h,generator_bearing,3h backward mean of generator bearing 1 (NDE) temperature rise over ambient,safe
+dT_genbrg_nde__std_3h,"sensor_14_avg,sensor_0_avg",rolling_std,3h,generator_bearing,3h backward std dev of generator bearing 1 (NDE) temperature rise over ambient,safe
+dT_genbrg_nde__mean_24h,"sensor_14_avg,sensor_0_avg",rolling_mean,24h,generator_bearing,24h backward mean of generator bearing 1 (NDE) temperature rise over ambient,safe
+dT_genbrg_nde__std_24h,"sensor_14_avg,sensor_0_avg",rolling_std,24h,generator_bearing,24h backward std dev of generator bearing 1 (NDE) temperature rise over ambient,safe
+dT_genbrg_nde__mean_7d,"sensor_14_avg,sensor_0_avg",rolling_mean,7d,generator_bearing,7d backward mean of generator bearing 1 (NDE) temperature rise over ambient,safe
+dT_genbrg_nde__std_7d,"sensor_14_avg,sensor_0_avg",rolling_std,7d,generator_bearing,7d backward std dev of generator bearing 1 (NDE) temperature rise over ambient,safe
+dT_genbrg_nde__range_24h,"sensor_14_avg,sensor_0_avg",rolling_range,24h,generator_bearing,24h backward max-min of generator bearing 1 (NDE) temperature rise over ambient,safe
+dT_genbrg_nde__slope_24h,"sensor_14_avg,sensor_0_avg",rolling_slope,24h,generator_bearing,24h backward OLS trend of generator bearing 1 (NDE) temperature rise over ambient (units/hour),safe
+dT_genbrg_nde__dev_short_long,"sensor_14_avg,sensor_0_avg",short_vs_long_deviation,3h vs 7d,generator_bearing,3h mean minus 7d mean of generator bearing 1 (NDE) temperature rise over ambient - recent departure from the machine's own baseline,safe
+dT_hyd_oil__mean_3h,"sensor_41_avg,sensor_0_avg",rolling_mean,3h,hydraulic,3h backward mean of hydraulic group oil temperature rise over ambient,safe
+dT_hyd_oil__std_3h,"sensor_41_avg,sensor_0_avg",rolling_std,3h,hydraulic,3h backward std dev of hydraulic group oil temperature rise over ambient,safe
+dT_hyd_oil__mean_24h,"sensor_41_avg,sensor_0_avg",rolling_mean,24h,hydraulic,24h backward mean of hydraulic group oil temperature rise over ambient,safe
+dT_hyd_oil__std_24h,"sensor_41_avg,sensor_0_avg",rolling_std,24h,hydraulic,24h backward std dev of hydraulic group oil temperature rise over ambient,safe
+dT_hyd_oil__mean_7d,"sensor_41_avg,sensor_0_avg",rolling_mean,7d,hydraulic,7d backward mean of hydraulic group oil temperature rise over ambient,safe
+dT_hyd_oil__std_7d,"sensor_41_avg,sensor_0_avg",rolling_std,7d,hydraulic,7d backward std dev of hydraulic group oil temperature rise over ambient,safe
+dT_hyd_oil__range_24h,"sensor_41_avg,sensor_0_avg",rolling_range,24h,hydraulic,24h backward max-min of hydraulic group oil temperature rise over ambient,safe
+dT_hyd_oil__slope_24h,"sensor_41_avg,sensor_0_avg",rolling_slope,24h,hydraulic,24h backward OLS trend of hydraulic group oil temperature rise over ambient (units/hour),safe
+dT_hyd_oil__dev_short_long,"sensor_41_avg,sensor_0_avg",short_vs_long_deviation,3h vs 7d,hydraulic,3h mean minus 7d mean of hydraulic group oil temperature rise over ambient - recent departure from the machine's own baseline,safe
+genbrg_de_minus_nde__mean_3h,"sensor_13_avg,sensor_14_avg",rolling_mean,3h,generator_bearing,3h backward mean of drive-end minus non-drive-end bearing temperature,safe
+genbrg_de_minus_nde__std_3h,"sensor_13_avg,sensor_14_avg",rolling_std,3h,generator_bearing,3h backward std dev of drive-end minus non-drive-end bearing temperature,safe
+genbrg_de_minus_nde__mean_24h,"sensor_13_avg,sensor_14_avg",rolling_mean,24h,generator_bearing,24h backward mean of drive-end minus non-drive-end bearing temperature,safe
+genbrg_de_minus_nde__std_24h,"sensor_13_avg,sensor_14_avg",rolling_std,24h,generator_bearing,24h backward std dev of drive-end minus non-drive-end bearing temperature,safe
+genbrg_de_minus_nde__mean_7d,"sensor_13_avg,sensor_14_avg",rolling_mean,7d,generator_bearing,7d backward mean of drive-end minus non-drive-end bearing temperature,safe
+genbrg_de_minus_nde__std_7d,"sensor_13_avg,sensor_14_avg",rolling_std,7d,generator_bearing,7d backward std dev of drive-end minus non-drive-end bearing temperature,safe
+genbrg_de_minus_nde__range_24h,"sensor_13_avg,sensor_14_avg",rolling_range,24h,generator_bearing,24h backward max-min of drive-end minus non-drive-end bearing temperature,safe
+genbrg_de_minus_nde__slope_24h,"sensor_13_avg,sensor_14_avg",rolling_slope,24h,generator_bearing,24h backward OLS trend of drive-end minus non-drive-end bearing temperature (units/hour),safe
+genbrg_de_minus_nde__dev_short_long,"sensor_13_avg,sensor_14_avg",short_vs_long_deviation,3h vs 7d,generator_bearing,3h mean minus 7d mean of drive-end minus non-drive-end bearing temperature - recent departure from the machine's own baseline,safe
+gbx_brg_minus_oil__mean_3h,"sensor_11_avg,sensor_12_avg",rolling_mean,3h,gearbox,3h backward mean of gearbox bearing minus gearbox oil temperature,safe
+gbx_brg_minus_oil__std_3h,"sensor_11_avg,sensor_12_avg",rolling_std,3h,gearbox,3h backward std dev of gearbox bearing minus gearbox oil temperature,safe
+gbx_brg_minus_oil__mean_24h,"sensor_11_avg,sensor_12_avg",rolling_mean,24h,gearbox,24h backward mean of gearbox bearing minus gearbox oil temperature,safe
+gbx_brg_minus_oil__std_24h,"sensor_11_avg,sensor_12_avg",rolling_std,24h,gearbox,24h backward std dev of gearbox bearing minus gearbox oil temperature,safe
+gbx_brg_minus_oil__mean_7d,"sensor_11_avg,sensor_12_avg",rolling_mean,7d,gearbox,7d backward mean of gearbox bearing minus gearbox oil temperature,safe
+gbx_brg_minus_oil__std_7d,"sensor_11_avg,sensor_12_avg",rolling_std,7d,gearbox,7d backward std dev of gearbox bearing minus gearbox oil temperature,safe
+gbx_brg_minus_oil__range_24h,"sensor_11_avg,sensor_12_avg",rolling_range,24h,gearbox,24h backward max-min of gearbox bearing minus gearbox oil temperature,safe
+gbx_brg_minus_oil__slope_24h,"sensor_11_avg,sensor_12_avg",rolling_slope,24h,gearbox,24h backward OLS trend of gearbox bearing minus gearbox oil temperature (units/hour),safe
+gbx_brg_minus_oil__dev_short_long,"sensor_11_avg,sensor_12_avg",short_vs_long_deviation,3h vs 7d,gearbox,3h mean minus 7d mean of gearbox bearing minus gearbox oil temperature - recent departure from the machine's own baseline,safe
+power_curve_dev__mean_3h,"power_30_avg,wind_speed_3_avg",rolling_mean,3h,power,3h backward mean of deviation from this turbine's own historic power curve,safe
+power_curve_dev__std_3h,"power_30_avg,wind_speed_3_avg",rolling_std,3h,power,3h backward std dev of deviation from this turbine's own historic power curve,safe
+power_curve_dev__mean_24h,"power_30_avg,wind_speed_3_avg",rolling_mean,24h,power,24h backward mean of deviation from this turbine's own historic power curve,safe
+power_curve_dev__std_24h,"power_30_avg,wind_speed_3_avg",rolling_std,24h,power,24h backward std dev of deviation from this turbine's own historic power curve,safe
+power_curve_dev__mean_7d,"power_30_avg,wind_speed_3_avg",rolling_mean,7d,power,7d backward mean of deviation from this turbine's own historic power curve,safe
+power_curve_dev__std_7d,"power_30_avg,wind_speed_3_avg",rolling_std,7d,power,7d backward std dev of deviation from this turbine's own historic power curve,safe
+power_curve_dev__range_24h,"power_30_avg,wind_speed_3_avg",rolling_range,24h,power,24h backward max-min of deviation from this turbine's own historic power curve,safe
+power_curve_dev__slope_24h,"power_30_avg,wind_speed_3_avg",rolling_slope,24h,power,24h backward OLS trend of deviation from this turbine's own historic power curve (units/hour),safe
+power_curve_dev__dev_short_long,"power_30_avg,wind_speed_3_avg",short_vs_long_deviation,3h vs 7d,power,3h mean minus 7d mean of deviation from this turbine's own historic power curve - recent departure from the machine's own baseline,safe
+dT_stator__mean_24h,"sensor_15/16/17_avg,sensor_0_avg",rolling_mean,24h,generator,24h backward mean of mean stator winding temperature rise over ambient,safe
+dT_stator__std_24h,"sensor_15/16/17_avg,sensor_0_avg",rolling_std,24h,generator,24h backward std dev of mean stator winding temperature rise over ambient,safe
+dT_stator__mean_7d,"sensor_15/16/17_avg,sensor_0_avg",rolling_mean,7d,generator,7d backward mean of mean stator winding temperature rise over ambient,safe
+dT_stator__dev_short_long,"sensor_15/16/17_avg,sensor_0_avg",short_vs_long_deviation,24h vs 7d,generator,24h mean minus 7d mean of mean stator winding temperature rise over ambient,safe
+dT_trafo__mean_24h,"sensor_38/39/40_avg,sensor_0_avg",rolling_mean,24h,transformer,24h backward mean of mean HV transformer temperature rise over ambient,safe
+dT_trafo__std_24h,"sensor_38/39/40_avg,sensor_0_avg",rolling_std,24h,transformer,24h backward std dev of mean HV transformer temperature rise over ambient,safe
+dT_trafo__mean_7d,"sensor_38/39/40_avg,sensor_0_avg",rolling_mean,7d,transformer,7d backward mean of mean HV transformer temperature rise over ambient,safe
+dT_trafo__dev_short_long,"sensor_38/39/40_avg,sensor_0_avg",short_vs_long_deviation,24h vs 7d,transformer,24h mean minus 7d mean of mean HV transformer temperature rise over ambient,safe
+dT_splitring__mean_24h,"sensor_19_avg,sensor_0_avg",rolling_mean,24h,generator,24h backward mean of split ring chamber temperature rise over ambient,safe
+dT_splitring__std_24h,"sensor_19_avg,sensor_0_avg",rolling_std,24h,generator,24h backward std dev of split ring chamber temperature rise over ambient,safe
+dT_splitring__mean_7d,"sensor_19_avg,sensor_0_avg",rolling_mean,7d,generator,7d backward mean of split ring chamber temperature rise over ambient,safe
+dT_splitring__dev_short_long,"sensor_19_avg,sensor_0_avg",short_vs_long_deviation,24h vs 7d,generator,24h mean minus 7d mean of split ring chamber temperature rise over ambient,safe
+stator_spread__mean_24h,sensor_15/16/17_avg,rolling_mean,24h,generator,24h backward mean of stator three-phase temperature imbalance,safe
+stator_spread__std_24h,sensor_15/16/17_avg,rolling_std,24h,generator,24h backward std dev of stator three-phase temperature imbalance,safe
+stator_spread__mean_7d,sensor_15/16/17_avg,rolling_mean,7d,generator,7d backward mean of stator three-phase temperature imbalance,safe
+stator_spread__dev_short_long,sensor_15/16/17_avg,short_vs_long_deviation,24h vs 7d,generator,24h mean minus 7d mean of stator three-phase temperature imbalance,safe
+trafo_spread__mean_24h,sensor_38/39/40_avg,rolling_mean,24h,transformer,24h backward mean of HV transformer three-phase temperature imbalance,safe
+trafo_spread__std_24h,sensor_38/39/40_avg,rolling_std,24h,transformer,24h backward std dev of HV transformer three-phase temperature imbalance,safe
+trafo_spread__mean_7d,sensor_38/39/40_avg,rolling_mean,7d,transformer,7d backward mean of HV transformer three-phase temperature imbalance,safe
+trafo_spread__dev_short_long,sensor_38/39/40_avg,short_vs_long_deviation,24h vs 7d,transformer,24h mean minus 7d mean of HV transformer three-phase temperature imbalance,safe
+gear_ratio__mean_24h,"sensor_18_avg,sensor_52_avg",rolling_mean,24h,mechanical,24h backward mean of generator rpm / rotor rpm - gearbox ratio integrity,safe
+gear_ratio__std_24h,"sensor_18_avg,sensor_52_avg",rolling_std,24h,mechanical,24h backward std dev of generator rpm / rotor rpm - gearbox ratio integrity,safe
+gear_ratio__mean_7d,"sensor_18_avg,sensor_52_avg",rolling_mean,7d,mechanical,7d backward mean of generator rpm / rotor rpm - gearbox ratio integrity,safe
+gear_ratio__dev_short_long,"sensor_18_avg,sensor_52_avg",short_vs_long_deviation,24h vs 7d,mechanical,24h mean minus 7d mean of generator rpm / rotor rpm - gearbox ratio integrity,safe
+sensor_5_std__mean_24h,sensor_5_std,rolling_mean,24h,mechanical,24h backward mean of within-interval pitch activity,safe
+sensor_5_std__std_24h,sensor_5_std,rolling_std,24h,mechanical,24h backward std dev of within-interval pitch activity,safe
+sensor_5_std__mean_7d,sensor_5_std,rolling_mean,7d,mechanical,7d backward mean of within-interval pitch activity,safe
+sensor_5_std__dev_short_long,sensor_5_std,short_vs_long_deviation,24h vs 7d,mechanical,24h mean minus 7d mean of within-interval pitch activity,safe
+sensor_52_std__mean_24h,sensor_52_std,rolling_mean,24h,mechanical,24h backward mean of within-interval rotor speed variability,safe
+sensor_52_std__std_24h,sensor_52_std,rolling_std,24h,mechanical,24h backward std dev of within-interval rotor speed variability,safe
+sensor_52_std__mean_7d,sensor_52_std,rolling_mean,7d,mechanical,7d backward mean of within-interval rotor speed variability,safe
+sensor_52_std__dev_short_long,sensor_52_std,short_vs_long_deviation,24h vs 7d,mechanical,24h mean minus 7d mean of within-interval rotor speed variability,safe
+op_power_bin,power_30_avg,operating_regime,instant,operating_condition,load bin (normalised grid power),safe
+op_wind_bin,wind_speed_3_avg,operating_regime,instant,operating_condition,wind speed bin (2 m/s),safe
+op_state,"sensor_52_avg,power_30_avg",operating_regime,instant,operating_condition,"0=idle (rotor<=5rpm), 1=transitional, 2=producing",safe
+op_frac_producing_24h,"sensor_52_avg,power_30_avg",rolling_mean,24h,operating_condition,fraction of the last 24h spent producing,safe
+win_n_obs_3h,time_stamp,window_occupancy,3h,data_quality,observations actually present in the 3h backward window (expected 18); exposes SCADA gaps,safe
+win_n_obs_24h,time_stamp,window_occupancy,24h,data_quality,observations actually present in the 24h backward window (expected 144); exposes SCADA gaps,safe
+win_n_obs_7d,time_stamp,window_occupancy,7d,data_quality,observations actually present in the 7d backward window (expected 1008); exposes SCADA gaps,safe
+win_has_full_7d,time_stamp,window_occupancy,7d,data_quality,1 when the 7d window holds at least 756 observations,safe
+status_type_id,status_type_id,EXCLUDED,,metadata/status,passthrough or absent; never a predictive feature,FORBIDDEN
+turbine_uid,turbine_uid,EXCLUDED,,metadata/status,passthrough or absent; never a predictive feature,FORBIDDEN
+asset_id,asset_id,EXCLUDED,,metadata/status,passthrough or absent; never a predictive feature,FORBIDDEN
+time_stamp,time_stamp,EXCLUDED,,metadata/status,passthrough or absent; never a predictive feature,FORBIDDEN
+event_id,event_id,EXCLUDED,,metadata/status,passthrough or absent; never a predictive feature,FORBIDDEN
+row_id_in_event,row_id_in_event,EXCLUDED,,metadata/status,passthrough or absent; never a predictive feature,FORBIDDEN
+train_test,train_test,EXCLUDED,,metadata/status,passthrough or absent; never a predictive feature,FORBIDDEN
+time_offset_days,time_offset_days,EXCLUDED,,metadata/status,passthrough or absent; never a predictive feature,FORBIDDEN
+time_stamp_aligned,time_stamp_aligned,EXCLUDED,,metadata/status,passthrough or absent; never a predictive feature,FORBIDDEN
+sensor_46,sensor_46,EXCLUDED_DEFECTIVE,,defective,constant-zero or scale-inconsistent; passthrough only,excluded_defective
+sensor_49,sensor_49,EXCLUDED_DEFECTIVE,,defective,constant-zero or scale-inconsistent; passthrough only,excluded_defective
+sensor_31_max,sensor_31_max,EXCLUDED_DEFECTIVE,,defective,constant-zero or scale-inconsistent; passthrough only,excluded_defective
+sensor_31_min,sensor_31_min,EXCLUDED_DEFECTIVE,,defective,constant-zero or scale-inconsistent; passthrough only,excluded_defective
+sensor_31_std,sensor_31_std,EXCLUDED_DEFECTIVE,,defective,constant-zero or scale-inconsistent; passthrough only,excluded_defective

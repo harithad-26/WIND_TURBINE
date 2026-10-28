@@ -1,0 +1,19 @@
+{
+  "step": "Phase4_Step3_DT_NBM",
+  "completed_at": "2026-10-02T01:12:51.997443",
+  "dt_models_trained": 441,
+  "loeo_folds": 21,
+  "target_variables": 21,
+  "total_predictions": 782187,
+  "depth_candidates": [
+    3,
+    4,
+    5,
+    6,
+    7,
+    8,
+    10
+  ],
+  "cv_folds": 5,
+  "validation_passed": true
+}

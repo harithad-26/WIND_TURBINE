@@ -1,0 +1,23 @@
+event_id,turbine_uid,label,description,status_at_event_start,nonzero_lead_hours,pct_nonzero_prev_14d
+68,A11,anomaly,Transformer failure,4,0.0,0.05
+22,A21,anomaly,Hydraulic group,4,168.0,50.02
+72,A21,anomaly,Gearbox failure,4,168.0,50.02
+73,A0,anomaly,Hydraulic group,4,168.0,50.02
+0,A0,anomaly,Generator bearing failure,4,0.0,0.05
+26,A0,anomaly,Hydraulic group,4,168.0,50.02
+40,A10,anomaly,Generator bearing failure,0,0.0,0.0
+42,A10,anomaly,Hydraulic group,4,168.0,50.02
+10,A10,anomaly,Gearbox failure,4,168.0,50.02
+45,A13,anomaly,Hydraulic group,4,168.0,50.02
+84,A13,anomaly,Hydraulic group,4,168.0,50.02
+25,A11,normal,,0,0.0,0.0
+69,A11,normal,,0,0.0,0.0
+13,A21,normal,,0,0.0,0.0
+24,A0,normal,,0,0.0,0.0
+3,A10,normal,,0,0.0,0.0
+17,A10,normal,,0,0.0,12.3
+38,A13,normal,,0,0.0,0.0
+71,A0,normal,,0,0.0,0.0
+14,A13,normal,,0,0.0,0.0
+92,A11,normal,,0,0.0,0.0
+51,A21,anomaly,Gearbox bearings damaged,4,64.83,19.34

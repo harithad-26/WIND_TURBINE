@@ -1,0 +1,14 @@
+{
+  "step": "Phase4_Steps4and5_Residuals_Zscore",
+  "completed_at": "2026-09-29T22:34:07.904869",
+  "loeo_folds": 21,
+  "target_variables": 21,
+  "total_residual_rows": 754155,
+  "rows_dropped_nan": 28032,
+  "zscore_mean": -0.016832,
+  "zscore_std": 1.409759,
+  "zscore_max_abs": 27.984,
+  "norm_method": "mu and sigma from training residuals only",
+  "formula": "z = (residual - mu_train) / sigma_train",
+  "validation_passed": true
+}

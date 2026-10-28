@@ -1,0 +1,11 @@
+check,result,detail
+c01_zscore_uses_train_stats_only,PASS,mu_train and sigma_train computed from training residuals only
+c02_no_nan_in_residuals,PASS,NaN residuals: 0
+c03_no_nan_in_zscores,PASS,NaN z_scores: 0
+c04_no_inf_in_zscores,PASS,Inf z_scores: 0
+c05_all_folds_present,PASS,21/21 folds
+c06_all_targets_present,PASS,All targets present
+c07_residual_correct,PASS,Max |computed - stored| residual: 7e-06
+c08_zscore_formula_correct,PASS,Max |computed - stored| z_score: 0.0
+c09_sigma_not_zero,PASS,Zero-sigma cases: 0
+c10_nan_rows_dropped_correctly,PASS,28032 rows dropped due to NaN actual_value

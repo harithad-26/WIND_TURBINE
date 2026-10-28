@@ -1,0 +1,19 @@
+{
+  "step": "Phase4_Step6_EventScores",
+  "completed_at": "2026-09-30T00:08:18.114951",
+  "n_events": 21,
+  "n_anomaly_events": 11,
+  "n_normal_events": 10,
+  "n_component_groups": 7,
+  "n_valid_observations": 37247,
+  "persistence_threshold": 2.5,
+  "median_anomaly_mean": 0.7434,
+  "median_normal_mean": 0.6827,
+  "p95_anomaly_mean": 1.5128,
+  "p95_normal_mean": 1.086,
+  "persistence_anomaly_mean": 0.0147,
+  "persistence_normal_mean": 0.0,
+  "missing_component_scores": 0,
+  "validation_passed": true,
+  "aggregation_method": "Within-component mean of abs_z, then equal-weight mean across components per observation"
+}

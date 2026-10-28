@@ -1,0 +1,940 @@
+{
+  "sampling": {
+    "A0": {
+      "n_obs": 94578,
+      "t_min": "2021-12-31 00:00:00",
+      "t_max": "2023-10-22 10:20:00",
+      "pct_exactly_10min": 99.971,
+      "n_gaps_gt_10min": 27,
+      "largest_gap_hours": 13.0,
+      "total_missing_intervals": 525,
+      "modal_step_minutes": 10.0
+    },
+    "A10": {
+      "n_obs": 98632,
+      "t_min": "2021-12-31 00:00:00",
+      "t_max": "2023-11-20 00:40:00",
+      "pct_exactly_10min": 99.944,
+      "n_gaps_gt_10min": 55,
+      "largest_gap_hours": 13.0,
+      "total_missing_intervals": 589,
+      "modal_step_minutes": 10.0
+    },
+    "A11": {
+      "n_obs": 76484,
+      "t_min": "2022-04-04 02:30:00",
+      "t_max": "2023-09-21 00:50:00",
+      "pct_exactly_10min": 99.973,
+      "n_gaps_gt_10min": 21,
+      "largest_gap_hours": 13.0,
+      "total_missing_intervals": 547,
+      "modal_step_minutes": 10.0
+    },
+    "A13": {
+      "n_obs": 80048,
+      "t_min": "2022-03-03 14:00:00",
+      "t_max": "2023-09-13 15:30:00",
+      "pct_exactly_10min": 99.968,
+      "n_gaps_gt_10min": 26,
+      "largest_gap_hours": 13.0,
+      "total_missing_intervals": 458,
+      "modal_step_minutes": 10.0
+    },
+    "A21": {
+      "n_obs": 75281,
+      "t_min": "2022-04-30 13:20:00",
+      "t_max": "2023-10-21 08:40:00",
+      "pct_exactly_10min": 99.942,
+      "n_gaps_gt_10min": 44,
+      "largest_gap_hours": 228.83,
+      "total_missing_intervals": 2308,
+      "modal_step_minutes": 10.0
+    }
+  },
+  "status": {
+    "0": {
+      "count": 367728,
+      "pct": 86.5196,
+      "turbines": [
+        "A0",
+        "A10",
+        "A11",
+        "A13",
+        "A21"
+      ],
+      "n_turbines": 5,
+      "first_seen": "2021-12-31 00:00:00",
+      "last_seen": "2023-11-20 00:40:00",
+      "n_episodes": 27,
+      "episode_min_minutes": 10,
+      "episode_max_minutes": 531370,
+      "episode_mean_minutes": 136195.56,
+      "episode_median_minutes": 76950.0,
+      "episode_p95_minutes": 401222.0
+    },
+    "3": {
+      "count": 9909,
+      "pct": 2.3314,
+      "turbines": [
+        "A0",
+        "A10",
+        "A11",
+        "A13",
+        "A21"
+      ],
+      "n_turbines": 5,
+      "first_seen": "2022-03-03 19:10:00",
+      "last_seen": "2023-10-22 10:10:00",
+      "n_episodes": 24,
+      "episode_min_minutes": 1450,
+      "episode_max_minutes": 4330,
+      "episode_mean_minutes": 4128.75,
+      "episode_median_minutes": 4320.0,
+      "episode_p95_minutes": 4320.0
+    },
+    "4": {
+      "count": 47386,
+      "pct": 11.149,
+      "turbines": [
+        "A0",
+        "A10",
+        "A11",
+        "A13",
+        "A21"
+      ],
+      "n_turbines": 5,
+      "first_seen": "2022-03-03 14:00:00",
+      "last_seen": "2023-10-19 10:10:00",
+      "n_episodes": 24,
+      "episode_min_minutes": 280,
+      "episode_max_minutes": 28510,
+      "episode_mean_minutes": 19744.17,
+      "episode_median_minutes": 20150.0,
+      "episode_p95_minutes": 22665.0
+    }
+  },
+  "status_by_turbine": {
+    "0": {
+      "A0": 79736,
+      "A10": 83216,
+      "A11": 71601,
+      "A13": 72570,
+      "A21": 60605
+    },
+    "3": {
+      "A0": 2555,
+      "A10": 2587,
+      "A11": 853,
+      "A13": 1441,
+      "A21": 2473
+    },
+    "4": {
+      "A0": 12287,
+      "A10": 12829,
+      "A11": 4030,
+      "A13": 6037,
+      "A21": 12203
+    }
+  },
+  "status_pct_by_turbine": {
+    "0": {
+      "A0": 84.31,
+      "A10": 84.37,
+      "A11": 93.62,
+      "A13": 90.66,
+      "A21": 80.51
+    },
+    "3": {
+      "A0": 2.7,
+      "A10": 2.62,
+      "A11": 1.12,
+      "A13": 1.8,
+      "A21": 3.29
+    },
+    "4": {
+      "A0": 12.99,
+      "A10": 13.01,
+      "A11": 5.27,
+      "A13": 7.54,
+      "A21": 16.21
+    }
+  },
+  "status_within_events": [
+    {
+      "event_id": 68,
+      "turbine_uid": "A11",
+      "label": "anomaly",
+      "description": "Transformer failure",
+      "n_obs_in_event": 2014,
+      "pct_status_0": 0.0,
+      "pct_status_3": 0.0,
+      "pct_status_4": 100.0
+    },
+    {
+      "event_id": 22,
+      "turbine_uid": "A21",
+      "label": "anomaly",
+      "description": "Hydraulic group",
+      "n_obs_in_event": 1005,
+      "pct_status_0": 0.0,
+      "pct_status_3": 0.1,
+      "pct_status_4": 99.9
+    },
+    {
+      "event_id": 72,
+      "turbine_uid": "A21",
+      "label": "anomaly",
+      "description": "Gearbox failure",
+      "n_obs_in_event": 1009,
+      "pct_status_0": 0.0,
+      "pct_status_3": 0.1,
+      "pct_status_4": 99.9
+    },
+    {
+      "event_id": 73,
+      "turbine_uid": "A0",
+      "label": "anomaly",
+      "description": "Hydraulic group",
+      "n_obs_in_event": 1009,
+      "pct_status_0": 0.0,
+      "pct_status_3": 0.1,
+      "pct_status_4": 99.9
+    },
+    {
+      "event_id": 0,
+      "turbine_uid": "A0",
+      "label": "anomaly",
+      "description": "Generator bearing failure",
+      "n_obs_in_event": 2012,
+      "pct_status_0": 0.0,
+      "pct_status_3": 0.0,
+      "pct_status_4": 100.0
+    },
+    {
+      "event_id": 26,
+      "turbine_uid": "A0",
+      "label": "anomaly",
+      "description": "Hydraulic group",
+      "n_obs_in_event": 1009,
+      "pct_status_0": 0.0,
+      "pct_status_3": 0.1,
+      "pct_status_4": 99.9
+    },
+    {
+      "event_id": 40,
+      "turbine_uid": "A10",
+      "label": "anomaly",
+      "description": "Generator bearing failure",
+      "n_obs_in_event": 4508,
+      "pct_status_0": 55.94,
+      "pct_status_3": 0.02,
+      "pct_status_4": 44.03
+    },
+    {
+      "event_id": 42,
+      "turbine_uid": "A10",
+      "label": "anomaly",
+      "description": "Hydraulic group",
+      "n_obs_in_event": 1007,
+      "pct_status_0": 0.0,
+      "pct_status_3": 0.1,
+      "pct_status_4": 99.9
+    },
+    {
+      "event_id": 10,
+      "turbine_uid": "A10",
+      "label": "anomaly",
+      "description": "Gearbox failure",
+      "n_obs_in_event": 981,
+      "pct_status_0": 0.0,
+      "pct_status_3": 0.1,
+      "pct_status_4": 99.9
+    },
+    {
+      "event_id": 45,
+      "turbine_uid": "A13",
+      "label": "anomaly",
+      "description": "Hydraulic group",
+      "n_obs_in_event": 1008,
+      "pct_status_0": 0.0,
+      "pct_status_3": 0.1,
+      "pct_status_4": 99.9
+    },
+    {
+      "event_id": 84,
+      "turbine_uid": "A13",
+      "label": "anomaly",
+      "description": "Hydraulic group",
+      "n_obs_in_event": 1005,
+      "pct_status_0": 0.0,
+      "pct_status_3": 0.1,
+      "pct_status_4": 99.9
+    },
+    {
+      "event_id": 25,
+      "turbine_uid": "A11",
+      "label": "normal",
+      "description": "",
+      "n_obs_in_event": 1847,
+      "pct_status_0": 100.0,
+      "pct_status_3": 0.0,
+      "pct_status_4": 0.0
+    },
+    {
+      "event_id": 69,
+      "turbine_uid": "A11",
+      "label": "normal",
+      "description": "",
+      "n_obs_in_event": 2017,
+      "pct_status_0": 100.0,
+      "pct_status_3": 0.0,
+      "pct_status_4": 0.0
+    },
+    {
+      "event_id": 13,
+      "turbine_uid": "A21",
+      "label": "normal",
+      "description": "",
+      "n_obs_in_event": 3007,
+      "pct_status_0": 100.0,
+      "pct_status_3": 0.0,
+      "pct_status_4": 0.0
+    },
+    {
+      "event_id": 24,
+      "turbine_uid": "A0",
+      "label": "normal",
+      "description": "",
+      "n_obs_in_event": 1995,
+      "pct_status_0": 100.0,
+      "pct_status_3": 0.0,
+      "pct_status_4": 0.0
+    },
+    {
+      "event_id": 3,
+      "turbine_uid": "A10",
+      "label": "normal",
+      "description": "",
+      "n_obs_in_event": 3014,
+      "pct_status_0": 100.0,
+      "pct_status_3": 0.0,
+      "pct_status_4": 0.0
+    },
+    {
+      "event_id": 17,
+      "turbine_uid": "A10",
+      "label": "normal",
+      "description": "",
+      "n_obs_in_event": 1917,
+      "pct_status_0": 100.0,
+      "pct_status_3": 0.0,
+      "pct_status_4": 0.0
+    },
+    {
+      "event_id": 38,
+      "turbine_uid": "A13",
+      "label": "normal",
+      "description": "",
+      "n_obs_in_event": 1824,
+      "pct_status_0": 100.0,
+      "pct_status_3": 0.0,
+      "pct_status_4": 0.0
+    },
+    {
+      "event_id": 71,
+      "turbine_uid": "A0",
+      "label": "normal",
+      "description": "",
+      "n_obs_in_event": 2017,
+      "pct_status_0": 100.0,
+      "pct_status_3": 0.0,
+      "pct_status_4": 0.0
+    },
+    {
+      "event_id": 14,
+      "turbine_uid": "A13",
+      "label": "normal",
+      "description": "",
+      "n_obs_in_event": 1037,
+      "pct_status_0": 100.0,
+      "pct_status_3": 0.0,
+      "pct_status_4": 0.0
+    },
+    {
+      "event_id": 92,
+      "turbine_uid": "A11",
+      "label": "normal",
+      "description": "",
+      "n_obs_in_event": 1342,
+      "pct_status_0": 100.0,
+      "pct_status_3": 0.0,
+      "pct_status_4": 0.0
+    },
+    {
+      "event_id": 51,
+      "turbine_uid": "A21",
+      "label": "anomaly",
+      "description": "Gearbox bearings damaged",
+      "n_obs_in_event": 1673,
+      "pct_status_0": 0.0,
+      "pct_status_3": 2.75,
+      "pct_status_4": 97.25
+    }
+  ],
+  "status_share_by_label": {
+    "pct_status_0": {
+      "anomaly": 4.66,
+      "normal": 100.0
+    },
+    "pct_status_3": {
+      "anomaly": 0.3,
+      "normal": 0.0
+    },
+    "pct_status_4": {
+      "anomaly": 95.04,
+      "normal": 0.0
+    }
+  },
+  "train_test_by_event": [
+    {
+      "event_id": 0,
+      "turbine_uid": "A0",
+      "label": "anomaly",
+      "n_train": 52148,
+      "n_pred": 2838,
+      "pct_pred": 5.16,
+      "train_max": "2023-08-04 06:00:00",
+      "pred_min": "2023-08-04 06:10:00",
+      "pred_strictly_after_train": true,
+      "pred_covers_event": true
+    },
+    {
+      "event_id": 3,
+      "turbine_uid": "A10",
+      "label": "normal",
+      "n_train": 52185,
+      "n_pred": 3302,
+      "pct_pred": 5.95,
+      "train_max": "2023-04-27 02:50:00",
+      "pred_min": "2023-04-27 03:00:00",
+      "pred_strictly_after_train": true,
+      "pred_covers_event": true
+    },
+    {
+      "event_id": 10,
+      "turbine_uid": "A10",
+      "label": "anomaly",
+      "n_train": 52323,
+      "n_pred": 1269,
+      "pct_pred": 2.37,
+      "train_max": "2023-10-09 08:30:00",
+      "pred_min": "2023-10-09 08:40:00",
+      "pred_strictly_after_train": true,
+      "pred_covers_event": true
+    },
+    {
+      "event_id": 13,
+      "turbine_uid": "A21",
+      "label": "normal",
+      "n_train": 50427,
+      "n_pred": 3583,
+      "pct_pred": 6.63,
+      "train_max": "2023-04-30 13:10:00",
+      "pred_min": "2023-04-30 13:20:00",
+      "pred_strictly_after_train": true,
+      "pred_covers_event": true
+    },
+    {
+      "event_id": 14,
+      "turbine_uid": "A13",
+      "label": "normal",
+      "n_train": 52296,
+      "n_pred": 1901,
+      "pct_pred": 3.51,
+      "train_max": "2023-03-03 13:50:00",
+      "pred_min": "2023-03-03 14:00:00",
+      "pred_strictly_after_train": true,
+      "pred_covers_event": true
+    },
+    {
+      "event_id": 17,
+      "turbine_uid": "A10",
+      "label": "normal",
+      "n_train": 52309,
+      "n_pred": 2781,
+      "pct_pred": 5.05,
+      "train_max": "2023-10-31 15:10:00",
+      "pred_min": "2023-10-31 15:20:00",
+      "pred_strictly_after_train": true,
+      "pred_covers_event": true
+    },
+    {
+      "event_id": 22,
+      "turbine_uid": "A21",
+      "label": "anomaly",
+      "n_train": 51888,
+      "n_pred": 1148,
+      "pct_pred": 2.16,
+      "train_max": "2023-08-12 09:40:00",
+      "pred_min": "2023-08-12 09:50:00",
+      "pred_strictly_after_train": true,
+      "pred_covers_event": true
+    },
+    {
+      "event_id": 24,
+      "turbine_uid": "A0",
+      "label": "normal",
+      "n_train": 52289,
+      "n_pred": 2714,
+      "pct_pred": 4.93,
+      "train_max": "2023-04-24 14:50:00",
+      "pred_min": "2023-04-24 15:00:00",
+      "pred_strictly_after_train": true,
+      "pred_covers_event": true
+    },
+    {
+      "event_id": 25,
+      "turbine_uid": "A11",
+      "label": "normal",
+      "n_train": 52289,
+      "n_pred": 2423,
+      "pct_pred": 4.43,
+      "train_max": "2023-05-23 06:40:00",
+      "pred_min": "2023-05-23 06:50:00",
+      "pred_strictly_after_train": true,
+      "pred_covers_event": true
+    },
+    {
+      "event_id": 26,
+      "turbine_uid": "A0",
+      "label": "anomaly",
+      "n_train": 52261,
+      "n_pred": 1441,
+      "pct_pred": 2.68,
+      "train_max": "2023-10-12 10:10:00",
+      "pred_min": "2023-10-12 10:20:00",
+      "pred_strictly_after_train": true,
+      "pred_covers_event": true
+    },
+    {
+      "event_id": 38,
+      "turbine_uid": "A13",
+      "label": "normal",
+      "n_train": 52291,
+      "n_pred": 2544,
+      "pct_pred": 4.64,
+      "train_max": "2023-06-28 15:30:00",
+      "pred_min": "2023-06-28 15:40:00",
+      "pred_strictly_after_train": true,
+      "pred_covers_event": true
+    },
+    {
+      "event_id": 40,
+      "turbine_uid": "A10",
+      "label": "anomaly",
+      "n_train": 51219,
+      "n_pred": 4939,
+      "pct_pred": 8.79,
+      "train_max": "2022-12-23 23:50:00",
+      "pred_min": "2022-12-24 00:00:00",
+      "pred_strictly_after_train": true,
+      "pred_covers_event": true
+    },
+    {
+      "event_id": 42,
+      "turbine_uid": "A10",
+      "label": "anomaly",
+      "n_train": 52303,
+      "n_pred": 1583,
+      "pct_pred": 2.94,
+      "train_max": "2023-09-09 15:40:00",
+      "pred_min": "2023-09-09 15:50:00",
+      "pred_strictly_after_train": true,
+      "pred_covers_event": true
+    },
+    {
+      "event_id": 45,
+      "turbine_uid": "A13",
+      "label": "anomaly",
+      "n_train": 52299,
+      "n_pred": 1440,
+      "pct_pred": 2.68,
+      "train_max": "2023-04-16 18:00:00",
+      "pred_min": "2023-04-16 18:10:00",
+      "pred_strictly_after_train": true,
+      "pred_covers_event": true
+    },
+    {
+      "event_id": 51,
+      "turbine_uid": "A21",
+      "label": "anomaly",
+      "n_train": 52043,
+      "n_pred": 2393,
+      "pct_pred": 4.4,
+      "train_max": "2023-10-04 01:20:00",
+      "pred_min": "2023-10-04 01:30:00",
+      "pred_strictly_after_train": true,
+      "pred_covers_event": true
+    },
+    {
+      "event_id": 68,
+      "turbine_uid": "A11",
+      "label": "anomaly",
+      "n_train": 52063,
+      "n_pred": 2295,
+      "pct_pred": 4.22,
+      "train_max": "2023-07-28 13:10:00",
+      "pred_min": "2023-07-28 13:20:00",
+      "pred_strictly_after_train": true,
+      "pred_covers_event": true
+    },
+    {
+      "event_id": 69,
+      "turbine_uid": "A11",
+      "label": "normal",
+      "n_train": 52220,
+      "n_pred": 2593,
+      "pct_pred": 4.73,
+      "train_max": "2023-09-03 00:40:00",
+      "pred_min": "2023-09-03 00:50:00",
+      "pred_strictly_after_train": true,
+      "pred_covers_event": true
+    },
+    {
+      "event_id": 71,
+      "turbine_uid": "A0",
+      "label": "normal",
+      "n_train": 52295,
+      "n_pred": 2449,
+      "pct_pred": 4.47,
+      "train_max": "2022-12-30 23:50:00",
+      "pred_min": "2022-12-31 00:00:00",
+      "pred_strictly_after_train": true,
+      "pred_covers_event": true
+    },
+    {
+      "event_id": 72,
+      "turbine_uid": "A21",
+      "label": "anomaly",
+      "n_train": 52065,
+      "n_pred": 2017,
+      "pct_pred": 3.73,
+      "train_max": "2023-10-07 08:30:00",
+      "pred_min": "2023-10-07 08:40:00",
+      "pred_strictly_after_train": true,
+      "pred_covers_event": true
+    },
+    {
+      "event_id": 73,
+      "turbine_uid": "A0",
+      "label": "anomaly",
+      "n_train": 52313,
+      "n_pred": 1729,
+      "pct_pred": 3.2,
+      "train_max": "2023-06-07 11:30:00",
+      "pred_min": "2023-06-07 11:40:00",
+      "pred_strictly_after_train": true,
+      "pred_covers_event": true
+    },
+    {
+      "event_id": 84,
+      "turbine_uid": "A13",
+      "label": "anomaly",
+      "n_train": 52335,
+      "n_pred": 1437,
+      "pct_pred": 2.67,
+      "train_max": "2023-09-03 15:20:00",
+      "pred_min": "2023-09-03 15:30:00",
+      "pred_strictly_after_train": true,
+      "pred_covers_event": true
+    },
+    {
+      "event_id": 92,
+      "turbine_uid": "A11",
+      "label": "normal",
+      "n_train": 52293,
+      "n_pred": 1774,
+      "pct_pred": 3.28,
+      "train_max": "2023-04-04 02:20:00",
+      "pred_min": "2023-04-04 02:30:00",
+      "pred_strictly_after_train": true,
+      "pred_covers_event": true
+    }
+  ],
+  "train_test_summary": {
+    "all_pred_after_train": true,
+    "all_pred_cover_event": true,
+    "n_events_with_both": 22,
+    "total_train_rows": 1146154,
+    "total_pred_rows": 50593
+  },
+  "train_test_ambiguous_timestamps": 38406,
+  "events": [
+    {
+      "event_id": 68,
+      "turbine_uid": "A11",
+      "asset": 11,
+      "event_label": "anomaly",
+      "event_description": "Transformer failure",
+      "event_start": "2023-07-28T13:20:00.000",
+      "event_end": "2023-08-11T13:10:00.000",
+      "event_duration_h": 335.8333333333,
+      "n_obs_in_event": 2014
+    },
+    {
+      "event_id": 22,
+      "turbine_uid": "A21",
+      "asset": 21,
+      "event_label": "anomaly",
+      "event_description": "Hydraulic group",
+      "event_start": "2023-08-12T09:50:00.000",
+      "event_end": "2023-08-19T10:00:00.000",
+      "event_duration_h": 168.1666666667,
+      "n_obs_in_event": 1005
+    },
+    {
+      "event_id": 72,
+      "turbine_uid": "A21",
+      "asset": 21,
+      "event_label": "anomaly",
+      "event_description": "Gearbox failure",
+      "event_start": "2023-10-10T08:40:00.000",
+      "event_end": "2023-10-17T08:40:00.000",
+      "event_duration_h": 168.0,
+      "n_obs_in_event": 1009
+    },
+    {
+      "event_id": 73,
+      "turbine_uid": "A0",
+      "asset": 0,
+      "event_label": "anomaly",
+      "event_description": "Hydraulic group",
+      "event_start": "2023-06-10T11:40:00.000",
+      "event_end": "2023-06-17T11:40:00.000",
+      "event_duration_h": 168.0,
+      "n_obs_in_event": 1009
+    },
+    {
+      "event_id": 0,
+      "turbine_uid": "A0",
+      "asset": 0,
+      "event_label": "anomaly",
+      "event_description": "Generator bearing failure",
+      "event_start": "2023-08-06T06:10:00.000",
+      "event_end": "2023-08-20T06:10:00.000",
+      "event_duration_h": 336.0,
+      "n_obs_in_event": 2012
+    },
+    {
+      "event_id": 26,
+      "turbine_uid": "A0",
+      "asset": 0,
+      "event_label": "anomaly",
+      "event_description": "Hydraulic group",
+      "event_start": "2023-10-12T10:20:00.000",
+      "event_end": "2023-10-19T10:20:00.000",
+      "event_duration_h": 168.0,
+      "n_obs_in_event": 1009
+    },
+    {
+      "event_id": 40,
+      "turbine_uid": "A10",
+      "asset": 10,
+      "event_label": "anomaly",
+      "event_description": "Generator bearing failure",
+      "event_start": "2022-12-25T00:00:00.000",
+      "event_end": "2023-01-25T13:00:00.000",
+      "event_duration_h": 757.0,
+      "n_obs_in_event": 4508
+    },
+    {
+      "event_id": 42,
+      "turbine_uid": "A10",
+      "asset": 10,
+      "event_label": "anomaly",
+      "event_description": "Hydraulic group",
+      "event_start": "2023-09-09T15:50:00.000",
+      "event_end": "2023-09-16T15:50:00.000",
+      "event_duration_h": 168.0,
+      "n_obs_in_event": 1007
+    },
+    {
+      "event_id": 10,
+      "turbine_uid": "A10",
+      "asset": 10,
+      "event_label": "anomaly",
+      "event_description": "Gearbox failure",
+      "event_start": "2023-10-11T08:40:00.000",
+      "event_end": "2023-10-18T08:40:00.000",
+      "event_duration_h": 168.0,
+      "n_obs_in_event": 981
+    },
+    {
+      "event_id": 45,
+      "turbine_uid": "A13",
+      "asset": 13,
+      "event_label": "anomaly",
+      "event_description": "Hydraulic group",
+      "event_start": "2023-04-19T18:10:00.000",
+      "event_end": "2023-04-26T18:10:00.000",
+      "event_duration_h": 168.0,
+      "n_obs_in_event": 1008
+    },
+    {
+      "event_id": 84,
+      "turbine_uid": "A13",
+      "asset": 13,
+      "event_label": "anomaly",
+      "event_description": "Hydraulic group",
+      "event_start": "2023-09-05T15:30:00.000",
+      "event_end": "2023-09-12T15:30:00.000",
+      "event_duration_h": 168.0,
+      "n_obs_in_event": 1005
+    },
+    {
+      "event_id": 25,
+      "turbine_uid": "A11",
+      "asset": 11,
+      "event_label": "normal",
+      "event_description": null,
+      "event_start": "2023-05-23T06:50:00.000",
+      "event_end": "2023-06-05T02:30:00.000",
+      "event_duration_h": 307.6666666667,
+      "n_obs_in_event": 1847
+    },
+    {
+      "event_id": 69,
+      "turbine_uid": "A11",
+      "asset": 11,
+      "event_label": "normal",
+      "event_description": null,
+      "event_start": "2023-09-04T00:50:00.000",
+      "event_end": "2023-09-18T00:50:00.000",
+      "event_duration_h": 336.0,
+      "n_obs_in_event": 2017
+    },
+    {
+      "event_id": 13,
+      "turbine_uid": "A21",
+      "asset": 21,
+      "event_label": "normal",
+      "event_description": null,
+      "event_start": "2023-05-03T13:20:00.000",
+      "event_end": "2023-05-24T10:20:00.000",
+      "event_duration_h": 501.0,
+      "n_obs_in_event": 3007
+    },
+    {
+      "event_id": 24,
+      "turbine_uid": "A0",
+      "asset": 0,
+      "event_label": "normal",
+      "event_description": null,
+      "event_start": "2023-04-27T15:00:00.000",
+      "event_end": "2023-05-11T11:20:00.000",
+      "event_duration_h": 332.3333333333,
+      "n_obs_in_event": 1995
+    },
+    {
+      "event_id": 3,
+      "turbine_uid": "A10",
+      "asset": 10,
+      "event_label": "normal",
+      "event_description": null,
+      "event_start": "2023-04-27T03:00:00.000",
+      "event_end": "2023-05-18T01:10:00.000",
+      "event_duration_h": 502.1666666667,
+      "n_obs_in_event": 3014
+    },
+    {
+      "event_id": 17,
+      "turbine_uid": "A10",
+      "asset": 10,
+      "event_label": "normal",
+      "event_description": null,
+      "event_start": "2023-11-02T15:20:00.000",
+      "event_end": "2023-11-16T00:40:00.000",
+      "event_duration_h": 321.3333333333,
+      "n_obs_in_event": 1917
+    },
+    {
+      "event_id": 38,
+      "turbine_uid": "A13",
+      "asset": 13,
+      "event_label": "normal",
+      "event_description": null,
+      "event_start": "2023-07-01T15:40:00.000",
+      "event_end": "2023-07-15T07:40:00.000",
+      "event_duration_h": 328.0,
+      "n_obs_in_event": 1824
+    },
+    {
+      "event_id": 71,
+      "turbine_uid": "A0",
+      "asset": 0,
+      "event_label": "normal",
+      "event_description": null,
+      "event_start": "2023-01-01T00:00:00.000",
+      "event_end": "2023-01-15T00:00:00.000",
+      "event_duration_h": 336.0,
+      "n_obs_in_event": 2017
+    },
+    {
+      "event_id": 14,
+      "turbine_uid": "A13",
+      "asset": 13,
+      "event_label": "normal",
+      "event_description": null,
+      "event_start": "2023-03-05T14:00:00.000",
+      "event_end": "2023-03-12T18:40:00.000",
+      "event_duration_h": 172.6666666667,
+      "n_obs_in_event": 1037
+    },
+    {
+      "event_id": 92,
+      "turbine_uid": "A11",
+      "asset": 11,
+      "event_label": "normal",
+      "event_description": null,
+      "event_start": "2023-04-05T02:30:00.000",
+      "event_end": "2023-04-14T10:00:00.000",
+      "event_duration_h": 223.5,
+      "n_obs_in_event": 1342
+    },
+    {
+      "event_id": 51,
+      "turbine_uid": "A21",
+      "asset": 21,
+      "event_label": "anomaly",
+      "event_description": "Gearbox bearings damaged",
+      "event_start": "2023-10-06T01:30:00.000",
+      "event_end": "2023-10-17T16:10:00.000",
+      "event_duration_h": 278.6666666667,
+      "n_obs_in_event": 1673
+    }
+  ],
+  "event_summary": {
+    "n_events": 22,
+    "n_anomaly": 12,
+    "n_normal": 10,
+    "failure_types": {
+      "Hydraulic group": 6,
+      "Gearbox failure": 2,
+      "Generator bearing failure": 2,
+      "Transformer failure": 1,
+      "Gearbox bearings damaged": 1
+    },
+    "anomalies_per_turbine": {
+      "A21": 3,
+      "A0": 3,
+      "A10": 3,
+      "A13": 2,
+      "A11": 1
+    },
+    "duration_h": {
+      "min": 168.0,
+      "max": 757.0,
+      "mean": 291.47
+    }
+  }
+}

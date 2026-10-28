@@ -1,0 +1,12 @@
+{
+  "step": "Phase4_Step45_DT_Residuals_Zscore",
+  "completed_at": "2026-10-02T13:49:57.821278",
+  "model": "dt",
+  "n_total_rows": 782187,
+  "n_valid_zscores": 754155,
+  "n_nan_actual": 28032,
+  "folds_processed": 21,
+  "targets_processed": 21,
+  "min_sigma_floor": 1e-06,
+  "validation_passed": true
+}

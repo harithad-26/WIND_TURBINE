@@ -1,0 +1,13 @@
+check,result,detail
+c01_all_folds_processed,PASS,21/21 folds processed
+c02_no_heldout_in_training,PASS,Enforced by timestamp < event_start filter + assertion
+c03_no_future_in_training,PASS,Enforced by timestamp < event_start filter + assertion
+c04_no_forbidden_inputs,PASS,Clean
+c05_status_not_input,PASS,status_type_id not in conditioning columns
+c06_event_id_not_input,PASS,event_id not in conditioning columns
+c07_train_test_not_input,PASS,train_test not in conditioning columns
+c08_scaler_fit_on_train_only,PASS,StandardScaler.fit_transform() on train only; .transform() on held-out
+c09_all_targets_processed,PASS,All 21 targets processed
+c10_predictions_correct_turbine,PASS,All predictions matched to correct turbine per fold
+c11_row_count_reconciled,PASS,actual=782187 vs approx_expected=782187 (ratio=1.0)
+c12_no_fabricated_values,PASS,"inf=False, all_constant=False"

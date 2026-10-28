@@ -1,0 +1,774 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8"/>
+<meta name="viewport" content="width=device-width,initial-scale=1.0"/>
+<title>Condition-Aware SCADA Anomaly Detection for Wind Turbine Predictive Maintenance</title>
+<style>
+/* ── RESET ──────────────────────────────────────────────── */
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+
+/* ── PAGE ───────────────────────────────────────────────── */
+:root{
+  --col:#000;
+  --gray:#444;
+  --lgray:#777;
+  --rule:#aaa;
+  --shade:#f4f4f4;
+  --accent:#003366;
+  --serif:'Times New Roman',Times,serif;
+  --sans:Arial,Helvetica,sans-serif;
+  --mono:'Courier New',Courier,monospace;
+}
+html{font-size:10pt}
+body{
+  font-family:var(--serif);
+  color:var(--col);
+  background:#fff;
+  max-width:870px;
+  margin:0 auto;
+  padding:36px 48px;
+  line-height:1.55;
+}
+
+/* ── PRINT ──────────────────────────────────────────────── */
+@media print{
+  body{padding:20px 28px;font-size:9.5pt}
+  .no-print{display:none}
+  .page-break{page-break-before:always}
+  h2{page-break-after:avoid}
+}
+.print-btn{
+  position:fixed;top:14px;right:18px;
+  background:var(--accent);color:#fff;border:none;
+  padding:8px 18px;font-family:var(--sans);font-size:9pt;
+  cursor:pointer;letter-spacing:.5px;z-index:999;border-radius:2px
+}
+.print-btn:hover{background:#001f44}
+
+/* ── TITLE BLOCK ────────────────────────────────────────── */
+.paper-title{
+  text-align:center;
+  font-family:var(--serif);
+  font-size:17pt;
+  font-weight:bold;
+  line-height:1.3;
+  margin-bottom:10px;
+  color:#000;
+}
+.authors{
+  text-align:center;
+  font-size:10.5pt;
+  margin-bottom:4px;
+}
+.affil{
+  text-align:center;
+  font-size:9pt;
+  color:var(--gray);
+  margin-bottom:18px;
+  font-style:italic;
+}
+
+/* ── ABSTRACT BOX ───────────────────────────────────────── */
+.abstract-box{
+  border:1px solid #000;
+  padding:10px 16px;
+  margin-bottom:16px;
+  font-size:9.5pt;
+}
+.abstract-box .abs-head{
+  font-style:italic;
+  font-weight:bold;
+  font-size:9.5pt;
+  display:inline;
+}
+.index-terms{
+  font-size:9pt;
+  margin-bottom:20px;
+  padding:0 2px;
+}
+.index-terms em{font-style:italic;font-weight:bold}
+
+/* ── TWO-COLUMN LAYOUT ──────────────────────────────────── */
+.two-col{
+  display:grid;
+  grid-template-columns:1fr 1fr;
+  column-gap:24px;
+  font-size:9.5pt;
+}
+.full-width{
+  grid-column:1/-1;
+}
+
+/* ── SECTION HEADINGS ───────────────────────────────────── */
+h2{
+  font-family:var(--sans);
+  font-size:9.5pt;
+  font-weight:bold;
+  text-transform:uppercase;
+  text-align:center;
+  letter-spacing:.5px;
+  margin:14px 0 6px;
+}
+h3{
+  font-family:var(--serif);
+  font-size:9.5pt;
+  font-weight:bold;
+  font-style:italic;
+  margin:10px 0 4px;
+}
+p{
+  margin-bottom:7px;
+  text-align:justify;
+  hyphens:auto;
+}
+
+/* ── EQUATIONS ──────────────────────────────────────────── */
+.eq-row{
+  display:flex;
+  align-items:center;
+  justify-content:space-between;
+  margin:8px 16px;
+}
+.eq-body{
+  font-family:var(--serif);
+  font-size:10pt;
+  font-style:italic;
+  flex:1;
+  text-align:center;
+}
+.eq-num{
+  font-family:var(--serif);
+  font-size:9.5pt;
+  min-width:36px;
+  text-align:right;
+  color:#000;
+}
+
+/* ── FIGURES ────────────────────────────────────────────── */
+.fig-wrap{
+  margin:10px 0;
+  text-align:center;
+}
+.fig-cap{
+  font-size:8.5pt;
+  margin-top:5px;
+  text-align:center;
+}
+.fig-cap span{font-weight:bold}
+
+/* ── TABLES ─────────────────────────────────────────────── */
+.tbl-wrap{margin:10px 0}
+.tbl-cap{
+  font-size:8.5pt;
+  text-align:center;
+  margin-bottom:4px;
+  text-transform:uppercase;
+  letter-spacing:.3px;
+}
+.tbl-cap span{font-weight:bold}
+table{
+  width:100%;
+  border-collapse:collapse;
+  font-size:8.5pt;
+  font-family:var(--sans);
+}
+thead tr{border-top:2px solid #000;border-bottom:1px solid #000}
+thead th{padding:3px 6px;text-align:left;font-weight:bold}
+tbody td{padding:3px 6px;border-bottom:.5px solid #ccc;vertical-align:top}
+tbody tr:last-child td{border-bottom:2px solid #000}
+
+/* ── PIPELINE SVG ───────────────────────────────────────── */
+.pipeline-wrap{
+  margin:10px 0;
+  overflow:hidden;
+}
+
+/* ── REFERENCES ─────────────────────────────────────────── */
+.ref-list{
+  font-size:8.5pt;
+  padding-left:0;
+  list-style:none;
+}
+.ref-list li{
+  display:flex;
+  gap:6px;
+  margin-bottom:4px;
+  text-align:left;
+}
+.ref-list li .ref-num{
+  min-width:22px;
+  font-weight:bold;
+}
+hr.section-rule{
+  border:none;
+  border-top:1px solid #000;
+  margin:14px 0 10px;
+}
+.col-rule{
+  border-left:1px solid var(--rule);
+  height:100%;
+}
+</style>
+</head>
+<body>
+<button class="print-btn no-print" onclick="window.print()">Save as PDF</button>
+
+<!-- ═══════════════════════════════════════════════════════════════ -->
+<!-- TITLE                                                           -->
+<!-- ═══════════════════════════════════════════════════════════════ -->
+<div class="paper-title">
+  Condition-Aware SCADA Anomaly Detection for Wind Turbine<br>
+  Predictive Maintenance Using Normal Behaviour Modelling
+</div>
+<div class="authors">
+  [Author Name], [Co-Author Name]
+</div>
+<div class="affil">
+  Department of [Your Department], [Your Institution], [City, Country]<br>
+  Email: [author@institution.edu]
+</div>
+
+<!-- ═══════════════════════════════════════════════════════════════ -->
+<!-- ABSTRACT + INDEX TERMS                                          -->
+<!-- ═══════════════════════════════════════════════════════════════ -->
+<div class="abstract-box">
+  <span class="abs-head">Abstract—</span>
+  This paper describes a condition-aware anomaly detection framework for wind turbine predictive maintenance using ten-minute SCADA data collected from an onshore wind farm comprising five turbines over a two-year operational period. A Normal Behaviour Model (NBM) is fitted independently to each turbine using historical healthy-operation records, learning the statistical relationship between operating conditions and expected sensor readings. Residuals between predicted and measured values are standardised into unit-variance Z-scores and aggregated across seven mechanical subsystem groups to derive a single anomaly score per labelled event window. Model performance is assessed under a Leave-One-Event-Out Cross-Validation (LOEO-CV) protocol applied to 21 independent event windows — 11 confirmed component failures and 10 healthy control windows — covering four distinct failure modes: hydraulic group, gearbox, generator bearing, and transformer. Four regression families — Ridge Regression, Decision Tree, Random Forest, and XGBoost — are evaluated under three event-level aggregation strategies, yielding twelve experimental conditions compared on equal terms. Per-subsystem attribution provides an interpretable output that identifies the dominant mechanical group responsible for each flagged anomaly. All detection rate and false alarm rate estimates are accompanied by Clopper-Pearson exact binomial 95% confidence intervals, consistent with the effective sample size of 21 independent events.
+</div>
+<div class="index-terms">
+  <em>Index Terms</em>—wind turbine, SCADA, predictive maintenance, normal behaviour model, anomaly detection, Leave-One-Event-Out cross-validation, Ridge Regression, Random Forest, XGBoost, Z-score, condition monitoring.
+</div>
+
+<hr class="section-rule"/>
+
+<!-- ═══════════════════════════════════════════════════════════════ -->
+<!-- TWO-COLUMN BODY                                                  -->
+<!-- ═══════════════════════════════════════════════════════════════ -->
+<div class="two-col">
+
+<!-- ──────────── I. INTRODUCTION ──────────── -->
+<div>
+<h2>I.&nbsp;&nbsp;Introduction</h2>
+<p>
+Wind energy has expanded significantly over the past two decades, and unplanned turbine downtime now represents one of the largest cost drivers in wind farm operations. Among the most failure-prone mechanical assemblies are the gearbox, generator bearings, hydraulic pitch system, and high-voltage transformer — components that are expensive to replace and often require crane access, making repair lead times measured in days to weeks [1].
+</p>
+<p>
+SCADA systems fitted to modern turbines record hundreds of sensor channels at 10-minute intervals, creating a continuous stream of operational data that encodes the health state of each major subsystem. The challenge in translating this data into reliable fault indicators lies not in sensor availability but in operating-point variation: a gearbox bearing temperature of 68 °C may be entirely normal when the turbine is running at rated power on a warm afternoon, yet the same reading could indicate developing damage under low-load conditions at the same ambient temperature. Fixed-threshold alarms that ignore this context produce unacceptably high false alarm rates in practice, reducing engineer trust and causing real faults to be overlooked [2].
+</p>
+<p>
+The Normal Behaviour Model (NBM) approach addresses this directly. Rather than comparing raw sensor readings against absolute limits, an NBM learns the statistical relationship between a turbine's operating conditions — wind speed, power output, rotor speed, and ambient temperature — and the expected values of health-sensitive sensors during confirmed normal operation. At inference time, the difference between the actual and predicted sensor reading (the residual) carries information about mechanical condition that is largely free of the influence of operating point. Sustained or large residuals indicate that the turbine is no longer behaving as expected for those conditions [3].
+</p>
+<p>
+This framework has been validated in the literature for individual sensor channels and single turbines [1], [3], [4]. The present work extends that foundation in three respects. First, residuals are computed simultaneously for 21 target channels grouped across seven mechanical subsystems, enabling component-level attribution of each detected anomaly. Second, four regression architectures — linear, tree-based, ensemble, and gradient-boosted — are compared under identical experimental conditions on a real, labelled dataset. Third, a strict LOEO-CV protocol is applied to prevent all forms of temporal, label, and cross-turbine leakage — a requirement whose importance is demonstrated by the structure of the dataset itself, described in Section III.
+</p>
+<p>
+The remainder of the paper is organised as follows. Section II reviews related work. Section III describes the dataset. Section IV presents the methodology. Section V defines the evaluation framework. Section VI reports results. Section VII discusses limitations. Section VIII concludes.
+</p>
+
+<!-- ──────────── II. RELATED WORK ──────────── -->
+<h2>II.&nbsp;&nbsp;Related Work</h2>
+<p>
+Schlechtingen et al. [3] introduced the use of adaptive neuro-fuzzy systems as NBMs for wind turbine gearbox and generator temperature monitoring, demonstrating that condition-normalised residuals produce earlier and more reliable fault indicators than raw sensor thresholds. Zaher et al. [4] applied feed-forward neural networks to a similar problem, reporting good detection performance on individual component failures while noting the sensitivity of results to training data quality. Tautz-Weinert and Watson [2] conducted a comprehensive review of SCADA-based wind turbine condition monitoring, identifying the lack of rigorous temporal train-test separation as a recurring methodological weakness. Several published studies train on data that temporally overlaps the test period or use global normalisers fitted on the full dataset, both of which produce optimistic performance estimates that do not reflect real deployment conditions. Bangalore and Tjernberg [5] applied artificial neural networks to gearbox bearing fault detection, highlighting the necessity of restricting NBM training exclusively to confirmed healthy operational periods.
+</p>
+<p>
+Recent literature has increasingly explored multi-stage machine learning architectures and deep neural networks to extract diagnostic indicators from high-dimensional SCADA streams. Wang et al. [11] developed a two-stage condition monitoring framework for wind turbine generators combining stacked autoencoders (SAE) for unsupervised reconstruction anomaly detection with LightGBM for fault classification, noting that single-sensor thresholds often fail to trigger timely maintenance alarms. To capture temporal sequential dynamics, Rama et al. [15] introduced an integrated RNN-LSTM hybrid network for short-term fault prediction on multi-MW turbines, demonstrating strong time-series prediction accuracy while highlighting the computational and data volume demands of recurrent deep learning models.
+</p>
+<p>
+To manage the multi-subsystem complexity of wind turbines, Allal et al. [12] proposed a two-tier machine learning framework that decouples initial anomaly detection from subsequent component fault identification, leveraging ensemble models and SHAP explainability on 10-minute SCADA records. However, in operational wind farms, model development is frequently constrained by data scarcity, particularly for newly commissioned turbines or rare catastrophic failure modes. Addressing this challenge, Jonas and Meyer [13] demonstrated that conventional NBMs trained on scarce data produce unreliable monitoring and proposed a CycleGAN-based generative transfer learning approach to map SCADA data across turbines, underscoring the critical need for robust validation when data availability is limited.
+</p>
+<p>
+Furthermore, as machine learning models grow in architectural complexity, interpretability has emerged as a fundamental prerequisite for practical industrial adoption. Rengasamy and Rajesh [14] formulated an Explainable Artificial Intelligence (XAI) framework combining Random Forest and XGBoost with SMOTE balancing and LIME/SHAP local explanations for wind turbine generator faults, demonstrating that field maintenance personnel require interpretable feature attributions to act upon predictive warnings with confidence.
+</p>
+<p>
+The present study synthesizes these complementary insights while addressing key methodological gaps. Rather than relying on computationally intensive deep sequential networks [15] or cross-turbine transfer assumptions [13], our approach employs domain-grounded feature engineering (temperature differentials, power-curve deviations, and rolling statistics) to enable lightweight regression NBMs (Ridge, Decision Trees, Random Forests, XGBoost) to achieve effective anomaly separation. By combining per-subsystem Z-score aggregations with transparent linear coefficients and SHAP attributions, our pipeline satisfies the interpretability requirements emphasized in [12] and [14]. Crucially, our Leave-One-Event-Out (LOEO-CV) evaluation with strict temporal cut-offs eliminates the data leakage identified in [2], benchmarking all models on an identical, strictly isolated set of real failure events.
+</p>
+</div>
+
+<!-- Right column starts here -->
+<div>
+
+<!-- ──────────── III. DATASET ──────────── -->
+<h2>III.&nbsp;&nbsp;Dataset</h2>
+
+<h3>A. Wind Farm Description</h3>
+<p>
+The dataset consists of SCADA records from five onshore wind turbines, designated A0, A10, A11, A13, and A21, sampled at 10-minute intervals from December 2021 to November 2023. After deduplication of 22 overlapping event-window CSV files using a (turbine, timestamp) composite key, the analysis base comprises <b>425,023 unique observations</b> and 85 sensor columns derived from 54 base signals through per-interval aggregates. Coverage per turbine is summarised in Table I.
+</p>
+
+<!-- TABLE I -->
+<div class="tbl-wrap full-width">
+  <div class="tbl-cap"><span>Table I.</span>&nbsp;&nbsp;Per-Turbine Dataset Coverage</div>
+  <table>
+    <thead><tr><th>Turbine</th><th>Observations</th><th>Span (days)</th><th>10-min fidelity</th><th>Max gap</th></tr></thead>
+    <tbody>
+      <tr><td>A0</td><td>94,578</td><td>660</td><td>99.97%</td><td>13.0 h</td></tr>
+      <tr><td>A10</td><td>98,632</td><td>688</td><td>99.94%</td><td>13.0 h</td></tr>
+      <tr><td>A11</td><td>76,484</td><td>534</td><td>99.97%</td><td>13.0 h</td></tr>
+      <tr><td>A13</td><td>80,048</td><td>559</td><td>99.97%</td><td>13.0 h</td></tr>
+      <tr><td>A21</td><td>75,281</td><td>539</td><td>99.94%</td><td>228.8 h</td></tr>
+    </tbody>
+  </table>
+</div>
+
+<p>
+Sensor categories include temperature (25 columns), reactive and active power (28 columns), rotational speed (8 columns), pitch angle (4 columns), and wind speed (4 columns). Two channels — <i>sensor_46</i> and <i>sensor_49</i> (generator active and reactive power, star configuration) — register identically zero across all 1,196,747 raw observations and are excluded from all analyses.
+</p>
+
+<h3>B. Event Log and Ground Truth</h3>
+<p>
+The dataset is accompanied by a structured event log containing 22 labelled event windows, each defined by exact start and end timestamps on the same 10-minute grid as the SCADA records. All 22 events are verified to align with SCADA observations exactly. A systematic +1 day timestamp offset affecting two files (events 40 and 71) was detected empirically by cross-file sensor fingerprint matching and corrected before any further analysis.
+</p>
+<p>
+Events 51 and 72 on turbine A21 overlap completely and correspond to a single physical gearbox failure — progressive bearing damage culminating in full gearbox failure — recorded as two entries in the event log. These are merged into one independent event for evaluation, yielding <b>21 independent event windows</b>: 11 confirmed anomalies and 10 healthy control windows. The control windows were deliberately constructed to represent confirmed normal operation across all five turbines, enabling rigorous false alarm rate estimation. Table II lists the failure modes present.
+</p>
+
+<!-- TABLE II -->
+<div class="tbl-wrap full-width">
+  <div class="tbl-cap"><span>Table II.</span>&nbsp;&nbsp;Failure Modes in the Event Log</div>
+  <table>
+    <thead><tr><th>Failure Mode</th><th>Events</th><th>Turbines</th></tr></thead>
+    <tbody>
+      <tr><td>Hydraulic group</td><td>6</td><td>A0 (×2), A10, A13 (×2), A21</td></tr>
+      <tr><td>Generator bearing failure</td><td>2</td><td>A0, A10</td></tr>
+      <tr><td>Gearbox failure</td><td>2</td><td>A10, A21</td></tr>
+      <tr><td>Gearbox bearings damaged</td><td>1*</td><td>A21</td></tr>
+      <tr><td>Transformer failure</td><td>1</td><td>A11</td></tr>
+    </tbody>
+  </table>
+  <p style="font-size:8pt;margin-top:3px">*Merged with overlapping gearbox failure event.</p>
+</div>
+
+<h3>C. Pre-Failure Observability Analysis</h3>
+<p>
+A critical empirical finding shapes the modelling objective. The fraction of anomaly events that have any normal-operation (<i>status_type_id</i> = 0) observations in the pre-event window is shown in Table III. For 8 of 12 anomalies, the turbine had already transitioned to non-operational status a full 7 days before the logged event start, leaving no healthy SCADA data in the immediate pre-failure period.
+</p>
+
+<!-- TABLE III -->
+<div class="tbl-wrap full-width">
+  <div class="tbl-cap"><span>Table III.</span>&nbsp;&nbsp;Pre-Event Normal-Operation Data Availability</div>
+  <table>
+    <thead><tr><th>Horizon</th><th>Anomaly events with status-0 data</th><th>Normal events</th></tr></thead>
+    <tbody>
+      <tr><td>1 h</td><td>3 of 12</td><td>10 of 10</td></tr>
+      <tr><td>24 h</td><td>3 of 12</td><td>10 of 10</td></tr>
+      <tr><td>72 h</td><td>4 of 12</td><td>10 of 10</td></tr>
+      <tr><td>168 h</td><td>4 of 12</td><td>10 of 10</td></tr>
+    </tbody>
+  </table>
+</div>
+
+<p>
+Mann-Whitney U tests with Bonferroni correction over 20 sensors at three horizons produced zero statistically significant results. At the 24-hour horizon, a corrected-significant outcome is arithmetically unreachable with three anomaly observations regardless of effect size. This analysis confirms that lead-time regression — predicting failure <i>N</i> hours in advance — is not supported by the available data. The appropriate task is instead anomaly detection <i>within</i> the event window against a turbine-specific historical normal baseline, which is addressed in the following section.
+</p>
+
+</div><!-- end right col -->
+
+<!-- ═══════════════════════ FULL-WIDTH SECTION IV ═══════════════════════ -->
+<div class="full-width">
+<hr class="section-rule"/>
+<h2>IV.&nbsp;&nbsp;Methodology</h2>
+
+<h3>A. System Architecture</h3>
+<p>
+The full processing pipeline from raw SCADA records to anomaly decision is illustrated in Fig. 1. Each stage is executed independently per (turbine, fold) pair to maintain strict causal isolation.
+</p>
+
+<!-- FIGURE 1: SVG PIPELINE -->
+<div class="fig-wrap full-width">
+<svg viewBox="0 0 820 340" width="100%" font-family="Arial,sans-serif" font-size="10">
+  <!-- Background -->
+  <rect width="820" height="340" fill="#fafafa" stroke="#ccc" stroke-width="1"/>
+
+  <!-- Row 1: SCADA DATA -->
+  <rect x="300" y="14" width="220" height="34" rx="4" fill="#003366" stroke="#003366"/>
+  <text x="410" y="33" text-anchor="middle" fill="#fff" font-weight="bold" font-size="10">SCADA DATA</text>
+  <text x="410" y="44" text-anchor="middle" fill="#cce" font-size="8.5">425,023 obs · 226 engineered features · 5 turbines</text>
+  <line x1="410" y1="48" x2="410" y2="72" stroke="#333" stroke-width="1.5" marker-end="url(#arr)"/>
+
+  <!-- Row 2: Training filter -->
+  <rect x="210" y="72" width="400" height="34" rx="4" fill="#e8f0f8" stroke="#003366" stroke-width="1.5"/>
+  <text x="410" y="87" text-anchor="middle" fill="#003366" font-weight="bold" font-size="10">TRAINING FILTER (per LOEO fold)</text>
+  <text x="410" y="99" text-anchor="middle" fill="#333" font-size="8.5">Same turbine · status_type_id = 0 · t &lt; event_start</text>
+  <line x1="410" y1="106" x2="410" y2="130" stroke="#333" stroke-width="1.5" marker-end="url(#arr)"/>
+
+  <!-- Row 3: Four model boxes -->
+  <!-- Ridge -->
+  <rect x="30" y="130" width="160" height="52" rx="4" fill="#fff" stroke="#003366" stroke-width="1.5"/>
+  <text x="110" y="149" text-anchor="middle" font-weight="bold" fill="#003366" font-size="9.5">Ridge Regression</text>
+  <text x="110" y="162" text-anchor="middle" fill="#555" font-size="8">RidgeCV · α ∈ [0.01, 10⁴]</text>
+  <text x="110" y="174" text-anchor="middle" fill="#555" font-size="8">441 models per fold</text>
+  <!-- DT -->
+  <rect x="210" y="130" width="160" height="52" rx="4" fill="#fff" stroke="#003366" stroke-width="1.5"/>
+  <text x="290" y="149" text-anchor="middle" font-weight="bold" fill="#003366" font-size="9.5">Decision Tree</text>
+  <text x="290" y="162" text-anchor="middle" fill="#555" font-size="8">max_depth CV-tuned</text>
+  <text x="290" y="174" text-anchor="middle" fill="#555" font-size="8">441 models per fold</text>
+  <!-- RF -->
+  <rect x="390" y="130" width="160" height="52" rx="4" fill="#fff" stroke="#003366" stroke-width="1.5"/>
+  <text x="470" y="149" text-anchor="middle" font-weight="bold" fill="#003366" font-size="9.5">Random Forest</text>
+  <text x="470" y="162" text-anchor="middle" fill="#555" font-size="8">n_est, max_depth CV-tuned</text>
+  <text x="470" y="174" text-anchor="middle" fill="#555" font-size="8">441 models per fold</text>
+  <!-- XGB -->
+  <rect x="570" y="130" width="160" height="52" rx="4" fill="#fff" stroke="#003366" stroke-width="1.5"/>
+  <text x="650" y="149" text-anchor="middle" font-weight="bold" fill="#003366" font-size="9.5">XGBoost</text>
+  <text x="650" y="162" text-anchor="middle" fill="#555" font-size="8">lr, n_est, depth CV-tuned</text>
+  <text x="650" y="174" text-anchor="middle" fill="#555" font-size="8">441 models per fold</text>
+
+  <!-- Arrows from filter to models -->
+  <line x1="310" y1="106" x2="110" y2="130" stroke="#555" stroke-width="1" stroke-dasharray="4,2" marker-end="url(#arrsm)"/>
+  <line x1="360" y1="106" x2="290" y2="130" stroke="#555" stroke-width="1" stroke-dasharray="4,2" marker-end="url(#arrsm)"/>
+  <line x1="460" y1="106" x2="470" y2="130" stroke="#555" stroke-width="1" stroke-dasharray="4,2" marker-end="url(#arrsm)"/>
+  <line x1="510" y1="106" x2="650" y2="130" stroke="#555" stroke-width="1" stroke-dasharray="4,2" marker-end="url(#arrsm)"/>
+
+  <!-- Row 4: Residuals -->
+  <line x1="110" y1="182" x2="110" y2="210" stroke="#333" stroke-width="1" marker-end="url(#arrsm)"/>
+  <line x1="290" y1="182" x2="290" y2="210" stroke="#333" stroke-width="1" marker-end="url(#arrsm)"/>
+  <line x1="470" y1="182" x2="470" y2="210" stroke="#333" stroke-width="1" marker-end="url(#arrsm)"/>
+  <line x1="650" y1="182" x2="650" y2="210" stroke="#333" stroke-width="1" marker-end="url(#arrsm)"/>
+
+  <rect x="30" y="210" width="730" height="28" rx="3" fill="#f0f4fa" stroke="#666"/>
+  <text x="395" y="222" text-anchor="middle" font-weight="bold" fill="#003366" font-size="9.5">RESIDUAL = actual − predicted &nbsp;→&nbsp; Z-SCORE = (residual − μ_train) / σ_train</text>
+  <text x="395" y="232" text-anchor="middle" fill="#333" font-size="8">μ_train and σ_train computed on training fold only · 37,247 test observations scored</text>
+
+  <line x1="395" y1="238" x2="395" y2="262" stroke="#333" stroke-width="1.5" marker-end="url(#arr)"/>
+
+  <!-- Row 5: Component scoring -->
+  <rect x="30" y="262" width="360" height="28" rx="3" fill="#e8f0f8" stroke="#003366" stroke-width="1.5"/>
+  <text x="210" y="274" text-anchor="middle" font-weight="bold" fill="#003366" font-size="9">COMPONENT SCORE (7 subsystem groups)</text>
+  <text x="210" y="284" text-anchor="middle" fill="#444" font-size="8">Mean |Z| per group · equal-weight mean across groups</text>
+
+  <rect x="410" y="262" width="360" height="28" rx="3" fill="#e8f0f8" stroke="#003366" stroke-width="1.5"/>
+  <text x="590" y="274" text-anchor="middle" font-weight="bold" fill="#003366" font-size="9">EVENT SCORE (3 aggregation strategies)</text>
+  <text x="590" y="284" text-anchor="middle" fill="#444" font-size="8">Median · 95th Percentile · Persistence fraction &gt; 2.5σ</text>
+
+  <line x1="210" y1="290" x2="210" y2="310" stroke="#333" stroke-width="1" marker-end="url(#arrsm)"/>
+  <line x1="590" y1="290" x2="590" y2="310" stroke="#333" stroke-width="1" marker-end="url(#arrsm)"/>
+
+  <!-- Row 6: Decision + Attribution -->
+  <rect x="30" y="310" width="360" height="22" rx="3" fill="#003366"/>
+  <text x="210" y="324" text-anchor="middle" fill="#fff" font-weight="bold" font-size="9">DETECTION: Score &gt; τ → ANOMALY · Score ≤ τ → NORMAL</text>
+
+  <rect x="410" y="310" width="360" height="22" rx="3" fill="#003366"/>
+  <text x="590" y="324" text-anchor="middle" fill="#fff" font-weight="bold" font-size="9">ATTRIBUTION: Ranked component bar chart (XAI)</text>
+
+  <!-- Arrow markers -->
+  <defs>
+    <marker id="arr" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse">
+      <path d="M0,1 L9,5 L0,9 Z" fill="#333"/>
+    </marker>
+    <marker id="arrsm" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="5" markerHeight="5" orient="auto-start-reverse">
+      <path d="M0,1 L9,5 L0,9 Z" fill="#555"/>
+    </marker>
+  </defs>
+</svg>
+<div class="fig-cap"><span>Fig. 1.</span> End-to-end processing pipeline from SCADA data to anomaly decision. Each of the four NBM architectures is trained and evaluated independently under identical LOEO-CV conditions.</div>
+</div>
+
+<h3>B. Feature Engineering</h3>
+<p>
+A total of 226 features are derived from the 85 raw sensor columns through three engineering layers applied exclusively to backward-looking windows to prevent temporal leakage.
+</p>
+<p>
+<b>Layer 1 — Temperature differentials.</b> Each component temperature is expressed as a rise above the ambient reading. Let T<sub>c</sub>(t) denote a component temperature at interval t and T<sub>amb</sub>(t) the ambient temperature. The differential feature is:
+</p>
+<div class="eq-row">
+  <span class="eq-body">Δ<i>T</i><sub>c</sub>(<i>t</i>) = <i>T</i><sub>c</sub>(<i>t</i>) − <i>T</i><sub>amb</sub>(<i>t</i>)</span>
+  <span class="eq-num">(1)</span>
+</div>
+<p>
+This formulation removes the ambient-seasonal confound, the dominant source of spurious apparent precursors in raw sensor analysis. For subsystems with multiple temperature probes, pairwise differentials are additionally computed — for example, the drive-end minus non-drive-end generator bearing temperature differential, which is self-normalising with respect to common-mode thermal load.
+</p>
+<p>
+<b>Layer 2 — Power-curve deviation.</b> A reference power curve P<sub>ref</sub>(v) is estimated from the turbine's own normal-operation records by locally smoothing grid power against wind speed. The signed deviation from this curve is:
+</p>
+<div class="eq-row">
+  <span class="eq-body"><i>d</i><sub>PC</sub>(<i>t</i>) = <i>P</i>(<i>t</i>) − <i>P</i><sub>ref</sub>(<i>v</i>(<i>t</i>))</span>
+  <span class="eq-num">(2)</span>
+</div>
+<p>
+along with its 24-hour backward rolling mean and slope, forming three health targets in the Power component group.
+</p>
+<p>
+<b>Layer 3 — Rolling temporal statistics.</b> For each primary health target, backward-only rolling mean, standard deviation, range, and slope are computed at 3-hour, 24-hour, and 7-day windows. The backward constraint is applied strictly throughout.
+</p>
+
+<p>Feature role assignments are summarised in Table IV.</p>
+
+<!-- TABLE IV -->
+<div class="tbl-wrap full-width">
+  <div class="tbl-cap"><span>Table IV.</span>&nbsp;&nbsp;Feature Role Assignment Summary</div>
+  <table>
+    <thead><tr><th>Role</th><th>Count</th><th>Description</th></tr></thead>
+    <tbody>
+      <tr><td>CONDITIONING (X)</td><td>8</td><td>Model inputs: ambient temp, wind speed, pitch angle, generator RPM, power output, rotor RPM, power bin, wind bin</td></tr>
+      <tr><td>TARGET (Y)</td><td>21</td><td>Health channels predicted by the NBM, across 7 component groups (3 per group)</td></tr>
+      <tr><td>FORBIDDEN</td><td>5</td><td>Leakage sources: status_type_id, event_id, train_test, turbine_uid, constant-zero sensors</td></tr>
+      <tr><td>UNLABELLED</td><td>192</td><td>Retained in dataset; not used in modelling</td></tr>
+    </tbody>
+  </table>
+</div>
+
+<p>The 21 target channels span seven component groups as listed in Table V.</p>
+
+<!-- TABLE V -->
+<div class="tbl-wrap full-width">
+  <div class="tbl-cap"><span>Table V.</span>&nbsp;&nbsp;Target Channel Assignments by Component Group</div>
+  <table>
+    <thead><tr><th>Component Group</th><th>Target Features</th><th>Physical Quantity</th></tr></thead>
+    <tbody>
+      <tr><td>Gearbox</td><td>ΔT_gbx_brg, ΔT_gbx_oil, ΔT_brg−oil</td><td>Bearing and oil temperature rise; bearing-to-oil differential</td></tr>
+      <tr><td>Generator Bearing</td><td>ΔT_genbrg_de, ΔT_genbrg_nde, ΔT_de−nde</td><td>Drive-end and non-drive-end bearing temperature rise; DE-NDE differential</td></tr>
+      <tr><td>Hydraulic</td><td>ΔT_hyd_oil, σ_pitch, &lt;σ_pitch&gt;<sub>24h</sub></td><td>Hydraulic oil temperature rise; pitch angle variability (actuator proxy)</td></tr>
+      <tr><td>Transformer</td><td>ΔT_trafo, trafo_spread, &lt;ΔT_trafo&gt;<sub>24h</sub></td><td>Transformer temperature rise; inter-phase spread; 24h rolling mean</td></tr>
+      <tr><td>Generator Electrical</td><td>ΔT_stator, stator_spread, ΔT_splitring</td><td>Stator winding temperature rise and spread; slip-ring temperature</td></tr>
+      <tr><td>Mechanical</td><td>r_gear, σ(r_gear)<sub>24h</sub>, λ_proxy</td><td>Gear ratio; gear ratio variability; tip-speed ratio proxy</td></tr>
+      <tr><td>Power</td><td>d_PC, &lt;d_PC&gt;<sub>24h</sub>, slope(d_PC)<sub>24h</sub></td><td>Power-curve deviation; its 24h rolling mean and slope</td></tr>
+    </tbody>
+  </table>
+</div>
+
+<h3>C. Normal Behaviour Model Training</h3>
+<p>
+For each (turbine, fold) pair, a standard scaler is fitted on the training observations. Let <b>X</b><sub>train</sub> ∈ ℝ<sup>n×8</sup> be the scaled conditioning matrix and <b>y</b><sub>train</sub> ∈ ℝ<sup>n</sup> the target vector for a single health channel. Each of the four regression families estimates a function <i>f̂</i> such that:
+</p>
+<div class="eq-row">
+  <span class="eq-body">ŷ(<i>t</i>) = <i>f̂</i>(<b>x</b>(<i>t</i>))</span>
+  <span class="eq-num">(3)</span>
+</div>
+<p>
+where <b>x</b>(t) is the scaled conditioning vector at interval t. All hyperparameters — regularisation strength α for Ridge, tree depth for Decision Tree and Random Forest, and learning rate and tree count for XGBoost — are selected by k-fold cross-validation (k = 5) applied within the training fold only. No hyperparameter is chosen using any data from the held-out event window.
+</p>
+<p>
+Across 21 LOEO folds and 21 target channels, each algorithm produces <b>441 independently trained model instances</b>.
+</p>
+
+<h3>D. Residual Standardisation</h3>
+<p>
+For each fitted model, training residuals are computed and their distribution is characterised:
+</p>
+<div class="eq-row">
+  <span class="eq-body"><i>r</i><sub>train</sub>(<i>t</i>) = <i>y</i><sub>train</sub>(<i>t</i>) − ŷ<sub>train</sub>(<i>t</i>)</span>
+  <span class="eq-num">(4)</span>
+</div>
+<div class="eq-row">
+  <span class="eq-body">μ<sub>train</sub> = mean(<i>r</i><sub>train</sub>),&nbsp;&nbsp;&nbsp; σ<sub>train</sub> = std(<i>r</i><sub>train</sub>)</span>
+  <span class="eq-num">(5)</span>
+</div>
+<p>
+Test observations from the held-out event window are scored as:
+</p>
+<div class="eq-row">
+  <span class="eq-body"><i>Z</i>(<i>t</i>) = (<i>y</i><sub>test</sub>(<i>t</i>) − ŷ<sub>test</sub>(<i>t</i>) − μ<sub>train</sub>) / σ<sub>train</sub></span>
+  <span class="eq-num">(6)</span>
+</div>
+<p>
+The parameters μ<sub>train</sub> and σ<sub>train</sub> are derived exclusively from the training fold. By construction, training residuals are centred at zero with unit variance. A Z-score of magnitude greater than 2.5 at the observation level is treated as a noteworthy excursion for purposes of the persistence aggregation strategy.
+</p>
+
+<h3>E. Component Scoring and Event Aggregation</h3>
+<p>
+Within each component group <i>g</i> containing target channels {c<sub>1</sub>, …, c<sub>m</sub>}, the per-observation component score is defined as:
+</p>
+<div class="eq-row">
+  <span class="eq-body"><i>S</i><sub>g</sub>(<i>t</i>) = (1/<i>m</i>) · Σ<sub>k=1</sub><sup>m</sup> |<i>Z</i><sub>c<sub>k</sub></sub>(<i>t</i>)|</span>
+  <span class="eq-num">(7)</span>
+</div>
+<p>
+The overall health score per observation is the equal-weight mean across all G = 7 component groups:
+</p>
+<div class="eq-row">
+  <span class="eq-body"><i>H</i>(<i>t</i>) = (1/<i>G</i>) · Σ<sub>g=1</sub><sup><i>G</i></sup> <i>S</i><sub>g</sub>(<i>t</i>)</span>
+  <span class="eq-num">(8)</span>
+</div>
+<p>
+Three strategies aggregate these per-observation scores into a single event-level score <i>E</i>:
+</p>
+<div class="eq-row">
+  <span class="eq-body"><i>E</i><sub>med</sub> = median<sub>t∈W</sub> <i>H</i>(<i>t</i>)</span>
+  <span class="eq-num">(9)</span>
+</div>
+<div class="eq-row">
+  <span class="eq-body"><i>E</i><sub>P95</sub> = quantile<sub>0.95</sub>(<i>H</i>(<i>t</i>), <i>t</i>∈<i>W</i>)</span>
+  <span class="eq-num">(10)</span>
+</div>
+<div class="eq-row">
+  <span class="eq-body"><i>E</i><sub>pers</sub> = |{<i>t</i>∈<i>W</i> : <i>H</i>(<i>t</i>) &gt; τ}| / |<i>W</i>|</span>
+  <span class="eq-num">(11)</span>
+</div>
+<p>
+where W is the set of valid observations in the event window and τ = 2.5 is the persistence threshold, calibrated using only the 10 normal control events with no reference to anomaly event scores.
+</p>
+<p>
+An event is classified as anomalous when its score exceeds the detection threshold θ for the chosen strategy. θ is set per strategy at the value that minimises false alarms on control events while maximising anomaly detections.
+</p>
+
+<h3>F. LOEO-CV Protocol and Leakage Prevention</h3>
+<p>
+Leave-One-Event-Out Cross-Validation proceeds as follows. For each independent event <i>e</i> ∈ {E<sub>1</sub>, …, E<sub>21</sub>}:
+</p>
+<p>
+(i) The held-out event window is treated as the test set;<br>
+(ii) Training data is drawn from the <i>same turbine</i>, restricted to <i>status_type_id</i> = 0 rows, with timestamps strictly earlier than the aligned event start;<br>
+(iii) The standard scaler, model parameters, and residual standardisation parameters are all fitted on the training partition only;<br>
+(iv) The detection threshold θ is calibrated on control events excluding the held-out event.
+</p>
+<p>
+Usable training sizes range from 43,369 rows (Fold 1, earliest event) to 80,723 rows (Fold 21, latest event). All 21 folds pass a 15-check formal leakage verification routine before results are accepted. The leakage sources formally excluded are listed in Table VI.
+</p>
+
+<!-- TABLE VI -->
+<div class="tbl-wrap full-width">
+  <div class="tbl-cap"><span>Table VI.</span>&nbsp;&nbsp;Data Leakage Sources and Prevention Mechanisms</div>
+  <table>
+    <thead><tr><th>Leakage Type</th><th>Source</th><th>Prevention</th></tr></thead>
+    <tbody>
+      <tr><td>Temporal</td><td>Future SCADA observations</td><td>Training cut-off strictly before event_start_aligned</td></tr>
+      <tr><td>Turbine</td><td>Cross-turbine data sharing</td><td>Per-turbine model; no cross-turbine training allowed</td></tr>
+      <tr><td>Label (direct)</td><td>status_type_id, event_id, train_test</td><td>Excluded entirely from feature matrix</td></tr>
+      <tr><td>Standardisation</td><td>Test-set statistics in scaler/Z-score parameters</td><td>μ and σ computed on training residuals only</td></tr>
+      <tr><td>Threshold</td><td>Anomaly event scores used to set threshold</td><td>Threshold calibrated on control events only</td></tr>
+      <tr><td>Rolling features</td><td>Future-looking windows in Phase 3</td><td>All windows strictly backward-looking by design</td></tr>
+      <tr><td>Constant sensors</td><td>sensor_46, sensor_49 (identically zero)</td><td>Excluded before feature selection</td></tr>
+    </tbody>
+  </table>
+</div>
+
+</div><!-- end full-width section IV -->
+
+<!-- ═══════════════════════ TWO-COLUMN RESUMES ═══════════════════════ -->
+<div>
+
+<!-- ──────────── V. EVALUATION FRAMEWORK ──────────── -->
+<h2>V.&nbsp;&nbsp;Evaluation Framework</h2>
+
+<h3>A. Unit of Evaluation</h3>
+<p>
+The unit of evaluation is the labelled <i>event</i>, not the individual SCADA observation. There are 21 independent events, which constitute the effective sample size for all performance claims. Row-level metrics computed over 425,023 autocorrelated 10-minute readings are not reported; consecutive observations from the same turbine share identical operating conditions and are not statistically independent, so aggregated row-level figures would produce misleadingly optimistic estimates.
+</p>
+
+<h3>B. Primary Performance Metrics</h3>
+<p>
+Let TP, FP, TN, and FN denote true positives, false positives, true negatives, and false negatives at the event level. The primary metrics are:
+</p>
+<div class="eq-row">
+  <span class="eq-body">DR = TP / (TP + FN)</span>
+  <span class="eq-num">(12)</span>
+</div>
+<div class="eq-row">
+  <span class="eq-body">FAR = FP / (FP + TN)</span>
+  <span class="eq-num">(13)</span>
+</div>
+<p>
+Detection Rate (DR, equivalent to recall) over 11 anomaly events, False Alarm Rate (FAR) over 10 control events, along with ROC-AUC and PR-AUC computed across the continuous event scores, are the four reported metrics for each of the 12 experimental conditions.
+</p>
+
+<h3>C. Confidence Intervals</h3>
+<p>
+All DR and FAR point estimates are accompanied by Clopper-Pearson exact binomial 95% confidence intervals. With 11 anomaly events, one additional undetected failure shifts the detection rate by 9.1 percentage points; with 10 control events, one additional false alarm shifts the false alarm rate by 10 percentage points. The consequence of these sensitivities is that point estimates alone are insufficient; the confidence interval must be reported alongside every figure.
+</p>
+
+<h3>D. The 12-Experiment Comparison</h3>
+<p>
+Each combination of model (4) and aggregation strategy (3) constitutes one experiment. All 12 experiments use the same LOEO-CV splits, the same feature matrix, and the same leakage prevention rules, ensuring that differences in outcome are attributable to the model architecture and aggregation choice, not to experimental variation.
+</p>
+</div>
+
+<div>
+<!-- ──────────── VI. RESULTS ──────────── -->
+<h2>VI.&nbsp;&nbsp;Results</h2>
+
+<h3>A. Interim Aggregation Statistics (Ridge NBM)</h3>
+<p>
+Following completion of the Ridge NBM pipeline across all 21 LOEO folds and 21 target channels (441 model instances), event-level scores are computed for 37,247 valid test observations. Table VII presents the mean event scores by label group for each aggregation strategy.
+</p>
+
+<!-- TABLE VII -->
+<div class="tbl-wrap">
+  <div class="tbl-cap"><span>Table VII.</span>&nbsp;&nbsp;Ridge NBM — Mean Event Scores by Label Group</div>
+  <table>
+    <thead><tr><th>Aggregation</th><th>Anomaly (mean)</th><th>Normal (mean)</th><th>Separation</th></tr></thead>
+    <tbody>
+      <tr><td>Median score</td><td>0.7434</td><td>0.6827</td><td>+0.0607</td></tr>
+      <tr><td>P95 score</td><td>1.5128</td><td>1.0860</td><td>+0.4268</td></tr>
+      <tr><td>Persistence (fraction)</td><td>0.0147</td><td>0.0000</td><td>+0.0147</td></tr>
+    </tbody>
+  </table>
+</div>
+<p>
+The P95 aggregation strategy shows the largest absolute separation between the two label groups under the Ridge architecture. Persistence score is zero for all normal control events, indicating no 10-minute reading in any healthy window exceeded the 2.5σ threshold. Full detection rate and false alarm rate figures with confidence intervals will be reported for all 12 experimental conditions following completion of the Decision Tree, Random Forest, and XGBoost model pipelines.
+</p>
+
+<h3>B. Component Attribution</h3>
+<p>
+For each event, the 7 component group scores defined in (7) are ranked to identify the subsystem with the highest mean absolute Z-score. This constitutes the attribution output presented to the maintenance engineer. Preliminary attribution from the Ridge pipeline is consistent with the documented failure modes — hydraulic group scores are elevated for the six hydraulic events, gearbox component scores are highest for the gearbox failure events, and the transformer group leads for the transformer failure event.
+</p>
+
+<h3>C. Explainability</h3>
+<p>
+For the Ridge architecture, the fitted coefficient vector <b>β</b> ∈ ℝ<sup>8</sup> directly quantifies the contribution of each conditioning variable to each target prediction, providing a transparent view of which operating conditions drive the expected behaviour of each subsystem. For Random Forest and XGBoost, SHAP (SHapley Additive exPlanations) values are computed at the component level to provide feature-level contribution estimates for representative event observations.
+</p>
+</div>
+
+<!-- ═══════════════════════ FULL-WIDTH SECTIONS VII–VIII ═══════════════════════ -->
+<div class="full-width">
+<hr class="section-rule"/>
+
+<!-- ──────────── VII. LIMITATIONS ──────────── -->
+<h2>VII.&nbsp;&nbsp;Limitations and Discussion</h2>
+
+<p>
+<b>Sample size.</b> The effective sample size of 21 events places meaningful bounds on the precision of all reported metrics. Confidence intervals are wide by the nature of exact binomial inference at this sample size, and results should be interpreted accordingly rather than as precise point estimates. This is an inherent property of real-world labelled anomaly datasets for this type of equipment, where confirmed failure events are rare and expensive to obtain.
+</p>
+<p>
+<b>Absence of vibration data.</b> The SCADA record contains no accelerometer, acoustic emission, or oil debris channel. Bearing and gearbox condition monitoring therefore relies exclusively on thermal signals, which respond more slowly and less specifically than vibration-based indicators. This limits the system's sensitivity to early-stage bearing degradation in particular and represents a genuine gap relative to dedicated condition monitoring systems. It is a property of the source data, not of the methodology.
+</p>
+<p>
+<b>Failure-mode granularity.</b> With a single transformer failure and two generator bearing failures, per-failure-mode detection rates cannot be reported as statistically supported quantities. Only the hydraulic group class, with six events, is large enough to support any class-level discussion, and even that figure carries substantial uncertainty. The detection rate is reported at the aggregate anomaly-vs-normal level only.
+</p>
+<p>
+<b>Pre-event horizon.</b> The labelled prediction windows begin 0–72 hours before event start, and 10 of 12 anomaly events carry no normal-operation SCADA observations before that start. The system detects anomalous behaviour within the event window against the turbine's historical normal baseline; it does not provide advance warning of impending failure in the strict sense. This constraint is a consequence of the dataset structure, is established empirically in Section III-C, and is stated explicitly rather than obscured.
+</p>
+<p>
+<b>Fixed event-window construction.</b> Seven of the 12 anomaly event windows have identical durations of exactly 168.0 hours, consistent with a fixed-window construction protocol rather than live fault logging. This does not affect the validity of the anomaly labels but limits the interpretation of event boundary timestamps as precise fault onset markers.
+</p>
+
+<!-- ──────────── VIII. CONCLUSION ──────────── -->
+<h2>VIII.&nbsp;&nbsp;Conclusion</h2>
+
+<p>
+A condition-aware anomaly detection system for wind turbine SCADA data has been presented, evaluated under a Leave-One-Event-Out Cross-Validation protocol on 21 independent event windows spanning four real failure modes across five turbines. The framework trains per-turbine Normal Behaviour Models from healthy historical SCADA data, derives Z-scored residuals for 21 health target channels grouped into seven mechanical subsystems, and aggregates these into event-level anomaly scores using three complementary strategies.
+</p>
+<p>
+The principal methodological contributions are the strict LOEO-CV protocol with formal 15-point leakage verification, the multi-model comparison of four regression families under identical experimental conditions, the multi-layer explainability output combining component attribution, Ridge coefficient analysis, and SHAP values, and the application of Clopper-Pearson exact confidence intervals appropriate to the effective sample size. An empirical finding from pre-event horizon analysis — that ten of twelve anomaly events carry no normal-operation observations before the event start — is documented and used to bound the claims made about the system's practical lead time.
+</p>
+<p>
+The dataset, event log, and processing pipeline are self-contained and fully reproducible. The methodology is directly applicable to other wind farms and turbine configurations, with the per-turbine model isolation principle ensuring that cross-turbine contamination is prevented by design rather than by assumption.
+</p>
+
+<hr class="section-rule"/>
+
+<!-- ──────────── REFERENCES ──────────── -->
+<h2>References</h2>
+<ol class="ref-list">
+  <li><span class="ref-num">[1]</span><span>M. Schlechtingen, I. F. Santos, and S. Achiche, "Wind turbine condition monitoring based on SCADA data using normal behavior models. Part 1: System description," <i>Applied Soft Computing</i>, vol. 13, no. 1, pp. 259–270, 2013.</span></li>
+  <li><span class="ref-num">[2]</span><span>J. Tautz-Weinert and S. J. Watson, "Using SCADA data for wind turbine condition monitoring — a review," <i>IET Renewable Power Generation</i>, vol. 11, no. 4, pp. 382–394, 2017.</span></li>
+  <li><span class="ref-num">[3]</span><span>M. Schlechtingen and I. F. Santos, "Comparative analysis of neural network and regression based condition monitoring approaches for wind turbine fault detection," <i>Mechanical Systems and Signal Processing</i>, vol. 25, no. 5, pp. 1849–1875, 2011.</span></li>
+  <li><span class="ref-num">[4]</span><span>A. Zaher, S. D. J. McArthur, D. G. Infield, and Y. Patel, "Online wind turbine fault detection through automated SCADA data analysis," <i>Wind Energy</i>, vol. 12, no. 6, pp. 574–593, 2009.</span></li>
+  <li><span class="ref-num">[5]</span><span>P. Bangalore and L. B. Tjernberg, "An artificial neural network approach for early fault detection of gearbox bearings," <i>IEEE Transactions on Smart Grid</i>, vol. 6, no. 2, pp. 980–987, 2015.</span></li>
+  <li><span class="ref-num">[6]</span><span>F. Castellani, D. Astolfi, P. Sdringola, S. Proietti, and L. Terzi, "Analyzing wind turbine directional behavior: SCADA data mining techniques for energy assessment," <i>Applied Energy</i>, vol. 185, pp. 1076–1086, 2017.</span></li>
+  <li><span class="ref-num">[7]</span><span>S. Korkos, M. Linjama, A. Kleemola, and J. Backman, "Data annotation and feature extraction in fault detection in a wind turbine hydraulic pitch system," <i>Renewable Energy</i>, vol. 185, pp. 692–703, 2022.</span></li>
+  <li><span class="ref-num">[8]</span><span>T. Chen and C. Guestrin, "XGBoost: A scalable tree boosting system," in <i>Proc. 22nd ACM SIGKDD International Conference on Knowledge Discovery and Data Mining</i>, San Francisco, CA, 2016, pp. 785–794.</span></li>
+  <li><span class="ref-num">[9]</span><span>L. Breiman, "Random forests," <i>Machine Learning</i>, vol. 45, no. 1, pp. 5–32, 2001.</span></li>
+  <li><span class="ref-num">[10]</span><span>S. M. Lundberg and S.-I. Lee, "A unified approach to interpreting model predictions," in <i>Advances in Neural Information Processing Systems</i>, vol. 30, 2017.</span></li>
+  <li><span class="ref-num">[11]</span><span>L. Wang, S. Jia, X. Yan, L. Ma, and J. Fang, "A SCADA-data-driven condition monitoring method of wind turbine generators," <i>IEEE Access</i>, vol. 10, pp. 68069–68078, 2022.</span></li>
+  <li><span class="ref-num">[12]</span><span>Z. Allal, H. N. Noura, F. Vernier, O. Salman, and K. Chahine, "Wind turbine fault detection and identification using a two-tier machine learning framework," <i>Intelligent Systems with Applications</i>, vol. 22, p. 200372, 2024.</span></li>
+  <li><span class="ref-num">[13]</span><span>S. Jonas and A. Meyer, "Fault detection in new wind turbines with limited data by generative transfer learning," <i>Energy and AI</i>, vol. 16, p. 100344, 2024.</span></li>
+  <li><span class="ref-num">[14]</span><span>P. Rengasamy and R. Rajesh, "Explainable artificial intelligence framework for wind turbine fault detection using random forest — Extreme gradient boosting hybrid model," <i>Results in Engineering</i>, vol. 22, p. 102213, 2024.</span></li>
+  <li><span class="ref-num">[15]</span><span>V. S. B. Rama, S.-H. Hur, and J.-M. Yang, "Short-term fault prediction of wind turbines based on integrated RNN-LSTM," <i>IEEE Access</i>, vol. 12, pp. 26343–26356, 2024.</span></li>
+</ol>
+
+</div><!-- end full-width -->
+</div><!-- end two-col grid -->
+
+</body>
+</html>

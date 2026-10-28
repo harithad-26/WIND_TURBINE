@@ -1,0 +1,24 @@
+# Python caches
+__pycache__/
+*.py[cod]
+*$py.class
+.ipynb_checkpoints/
+
+# Parquet data caches (>100MB exceeds GitHub limit)
+*.parquet
+analysis_data/**/*.parquet
+analysis_data/*.parquet
+
+# Excel data caches (~823MB redundant exports)
+cleaned_data/excel/
+cleaned_data/*.xlsx
+
+# Full Zenodo datasets (~765MB total). Keep lightweight representative samples (0.csv and 25.csv)
+datasets/*.csv
+!datasets/0.csv
+!datasets/25.csv
+
+# Environment & IDE
+.vscode/
+.idea/
+*.swp

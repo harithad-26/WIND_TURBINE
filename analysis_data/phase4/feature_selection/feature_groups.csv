@@ -1,0 +1,22 @@
+component_group,column,description,in_phase3_data
+Gearbox,dT_gbx_brg,gearbox bearing temperature rise above ambient,True
+Gearbox,dT_gbx_oil,gearbox oil temperature rise above ambient,True
+Gearbox,gbx_brg_minus_oil,bearing vs oil temp differential,True
+Generator_Bearing,dT_genbrg_de,generator drive-end bearing temp rise,True
+Generator_Bearing,dT_genbrg_nde,generator non-drive-end bearing temp rise,True
+Generator_Bearing,genbrg_de_minus_nde,DE vs NDE bearing differential,True
+Generator_Electrical,dT_splitring,slip-ring temperature rise,True
+Generator_Electrical,dT_stator,stator winding temperature rise,True
+Generator_Electrical,stator_spread,stator winding temperature spread,True
+Hydraulic,dT_hyd_oil,hydraulic oil temperature rise,True
+Hydraulic,sensor_5_std,pitch angle std dev - hydraulic activity proxy,True
+Hydraulic,sensor_5_std__mean_24h,24h rolling mean of pitch std dev,True
+Mechanical,gear_ratio,generator RPM / rotor RPM ratio,True
+Mechanical,gear_ratio__std_24h,24h rolling std dev of gear ratio,True
+Mechanical,tsr_proxy,tip-speed ratio proxy,True
+Power,power_curve_dev,deviation from expected power curve,True
+Power,power_curve_dev__mean_24h,24h rolling mean of power curve deviation,True
+Power,power_curve_dev__slope_24h,24h rolling slope of power curve deviation,True
+Transformer,dT_trafo,transformer temperature rise above ambient,True
+Transformer,dT_trafo__mean_24h,24h rolling mean of transformer temp rise,True
+Transformer,trafo_spread,transformer winding temperature spread,True

@@ -1,0 +1,66 @@
+{
+  "all_passed": true,
+  "checks": {
+    "c01_21_independent_events": {
+      "result": "PASS",
+      "detail": "21 events found (expected 21)"
+    },
+    "c02_11_anomaly_10_normal": {
+      "result": "PASS",
+      "detail": "anomaly=11 normal=10"
+    },
+    "c03_E51_72_one_event": {
+      "result": "PASS",
+      "detail": "E51_72 rows in event_scores: 1"
+    },
+    "c04_no_out_of_window_rows": {
+      "result": "PASS",
+      "detail": "z_scores come from Step 4+5 which used strict event window masks"
+    },
+    "c05_no_nan_actual_as_zero": {
+      "result": "PASS",
+      "detail": "NaN z_scores in input: 0 (already excluded in Steps 4+5)"
+    },
+    "c06_abs_z_for_magnitude": {
+      "result": "PASS",
+      "detail": "abs_z = abs(z_score) computed locally; signed z_score column untouched"
+    },
+    "c07_authoritative_components_only": {
+      "result": "PASS",
+      "detail": "All components authoritative"
+    },
+    "c08_no_status_in_scores": {
+      "result": "PASS",
+      "detail": "status_type_id not in z_scored_residuals columns"
+    },
+    "c09_label_not_used_to_compute_scores": {
+      "result": "PASS",
+      "detail": "event_label is carried as metadata only; no conditional computation on it"
+    },
+    "c10_no_future_information": {
+      "result": "PASS",
+      "detail": "Scores built from held-out event observations only (Step 4+5 design)"
+    },
+    "c11_three_strategies_present": {
+      "result": "PASS",
+      "detail": "median=True p95=True persistence=True"
+    },
+    "c12_persistence_threshold_2p5": {
+      "result": "PASS",
+      "detail": "Thresholds found: [2.5]"
+    },
+    "c13_no_infinite_scores": {
+      "result": "PASS",
+      "detail": "No Inf in any score column"
+    },
+    "c14_finite_where_valid": {
+      "result": "PASS",
+      "detail": "NaN scores where valid observations exist: 0"
+    },
+    "c15_correct_row_count": {
+      "result": "PASS",
+      "detail": "21 rows (expected 21)"
+    }
+  },
+  "timestamp": "2026-09-30T00:08:18.105542"
+}

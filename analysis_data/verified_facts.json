@@ -1,0 +1,140 @@
+{
+  "n_raw_files": 22,
+  "rows_unique": 425023,
+  "cols_unique": 85,
+  "n_turbines": 5,
+  "asset_ids": [
+    0,
+    10,
+    11,
+    13,
+    21
+  ],
+  "t_min": "2021-12-31 00:00:00",
+  "t_max": "2023-11-20 00:40:00",
+  "span_days": 689,
+  "missing_unique": {
+    "sensor_14_avg": 7,
+    "sensor_22_avg": 7
+  },
+  "rows_phase1_master": 1196747,
+  "phase1_duplicates": 771542,
+  "turbines": {
+    "A0": {
+      "asset_id": 0,
+      "rows": 94578,
+      "pct_of_total": 22.25,
+      "t_min": "2021-12-31 00:00:00",
+      "t_max": "2023-10-22 10:20:00",
+      "modal_step_min": 10.0,
+      "pct_exactly_10min": 99.971,
+      "n_gaps": 27,
+      "largest_gap_h": 13.0
+    },
+    "A10": {
+      "asset_id": 10,
+      "rows": 98632,
+      "pct_of_total": 23.21,
+      "t_min": "2021-12-31 00:00:00",
+      "t_max": "2023-11-20 00:40:00",
+      "modal_step_min": 10.0,
+      "pct_exactly_10min": 99.944,
+      "n_gaps": 55,
+      "largest_gap_h": 13.0
+    },
+    "A11": {
+      "asset_id": 11,
+      "rows": 76484,
+      "pct_of_total": 18.0,
+      "t_min": "2022-04-04 02:30:00",
+      "t_max": "2023-09-21 00:50:00",
+      "modal_step_min": 10.0,
+      "pct_exactly_10min": 99.973,
+      "n_gaps": 21,
+      "largest_gap_h": 13.0
+    },
+    "A13": {
+      "asset_id": 13,
+      "rows": 80048,
+      "pct_of_total": 18.83,
+      "t_min": "2022-03-03 14:00:00",
+      "t_max": "2023-09-13 15:30:00",
+      "modal_step_min": 10.0,
+      "pct_exactly_10min": 99.968,
+      "n_gaps": 26,
+      "largest_gap_h": 13.0
+    },
+    "A21": {
+      "asset_id": 21,
+      "rows": 75281,
+      "pct_of_total": 17.71,
+      "t_min": "2022-04-30 13:20:00",
+      "t_max": "2023-10-21 08:40:00",
+      "modal_step_min": 10.0,
+      "pct_exactly_10min": 99.942,
+      "n_gaps": 44,
+      "largest_gap_h": 228.83
+    }
+  },
+  "cols_by_event": 90,
+  "n_meta_cols": 9,
+  "n_sensor_cols": 81,
+  "n_doc_base_signals": 54,
+  "rows_by_event": 1196747,
+  "meta_cols": [
+    "event_id",
+    "time_stamp",
+    "asset_id",
+    "row_id_in_event",
+    "train_test",
+    "status_type_id",
+    "time_offset_days",
+    "time_stamp_aligned",
+    "turbine_uid"
+  ],
+  "status_counts": {
+    "0": 367728,
+    "3": 9909,
+    "4": 47386
+  },
+  "train_test_counts": {
+    "train": 1146154,
+    "prediction": 50593
+  },
+  "ambiguous_train_test": 38406,
+  "n_events": 22,
+  "n_anomaly": 12,
+  "n_normal": 10,
+  "event_ids": [
+    0,
+    3,
+    10,
+    13,
+    14,
+    17,
+    22,
+    24,
+    25,
+    26,
+    38,
+    40,
+    42,
+    45,
+    51,
+    68,
+    69,
+    71,
+    72,
+    73,
+    84,
+    92
+  ],
+  "failure_modes": {
+    "Hydraulic group": 6,
+    "Gearbox failure": 2,
+    "Generator bearing failure": 2,
+    "Transformer failure": 1,
+    "Gearbox bearings damaged": 1
+  },
+  "max_event_rows": 56158
+}

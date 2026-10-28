@@ -1,0 +1,71 @@
+{
+  "source_files": 22,
+  "rows_event_level": 1196747,
+  "rows_unique": 425023,
+  "duplicate_rows_removed": 771724,
+  "duplicate_pct": 64.4851,
+  "turbines": [
+    "A0",
+    "A10",
+    "A11",
+    "A13",
+    "A21"
+  ],
+  "turbine_to_events": {
+    "A0": [
+      0,
+      24,
+      26,
+      71,
+      73
+    ],
+    "A10": [
+      3,
+      10,
+      17,
+      40,
+      42
+    ],
+    "A11": [
+      25,
+      68,
+      69,
+      92
+    ],
+    "A13": [
+      14,
+      38,
+      45,
+      84
+    ],
+    "A21": [
+      13,
+      22,
+      51,
+      72
+    ]
+  },
+  "timestamp_offsets_applied": {
+    "71": "1 days 00:00:00",
+    "40": "1 days 00:00:00"
+  },
+  "min_pairwise_agreement_pct_after_alignment": 100.0,
+  "constant_zero_columns": [
+    "sensor_46",
+    "sensor_49"
+  ],
+  "columns_with_missing": {
+    "sensor_14_avg": 20,
+    "sensor_22_avg": 20
+  },
+  "aligned_time_range": [
+    "2021-12-31 00:00:00",
+    "2023-11-20 00:40:00"
+  ],
+  "fingerprint_columns": [
+    "wind_speed_3_avg",
+    "power_30_avg",
+    "sensor_11_avg",
+    "sensor_13_avg"
+  ]
+}

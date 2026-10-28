@@ -1,0 +1,23 @@
+event_id,turbine_uid,label,description,n_obs_in_event,pct_status_0,pct_status_3,pct_status_4
+68,A11,anomaly,Transformer failure,2014,0.0,0.0,100.0
+22,A21,anomaly,Hydraulic group,1005,0.0,0.1,99.9
+72,A21,anomaly,Gearbox failure,1009,0.0,0.1,99.9
+73,A0,anomaly,Hydraulic group,1009,0.0,0.1,99.9
+0,A0,anomaly,Generator bearing failure,2012,0.0,0.0,100.0
+26,A0,anomaly,Hydraulic group,1009,0.0,0.1,99.9
+40,A10,anomaly,Generator bearing failure,4508,55.94,0.02,44.03
+42,A10,anomaly,Hydraulic group,1007,0.0,0.1,99.9
+10,A10,anomaly,Gearbox failure,981,0.0,0.1,99.9
+45,A13,anomaly,Hydraulic group,1008,0.0,0.1,99.9
+84,A13,anomaly,Hydraulic group,1005,0.0,0.1,99.9
+25,A11,normal,,1847,100.0,0.0,0.0
+69,A11,normal,,2017,100.0,0.0,0.0
+13,A21,normal,,3007,100.0,0.0,0.0
+24,A0,normal,,1995,100.0,0.0,0.0
+3,A10,normal,,3014,100.0,0.0,0.0
+17,A10,normal,,1917,100.0,0.0,0.0
+38,A13,normal,,1824,100.0,0.0,0.0
+71,A0,normal,,2017,100.0,0.0,0.0
+14,A13,normal,,1037,100.0,0.0,0.0
+92,A11,normal,,1342,100.0,0.0,0.0
+51,A21,anomaly,Gearbox bearings damaged,1673,0.0,2.75,97.25
